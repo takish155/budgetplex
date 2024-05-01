@@ -1,0 +1,148 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid()) @map("_id")
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid()) @map("_id")
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id                 String              @id @default(cuid()) @map("_id")
+  name               String?
+  username           String?             @unique
+  email              String?             @unique
+  emailVerified      DateTime?
+  hashedPassword     String?
+  image              String?
+  accounts           Account[]
+  sessions           Session[]
+  income             Income[]
+  expenses           Expenses[]
+  bills              Bills[]
+  salary             Salary?
+  Shift              Shift[]
+  userSalarySettings UserSalarySettings?
+  finanicalGoals     FinanicalGoals[]
+  isSetupSalary      Boolean             @default(false)
+}
+
+model VerificationToken {
+  id         String   @id @default(cuid()) @map("_id")
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Income {
+  id          String   @id @default(cuid()) @map("_id")
+  title       String
+  userId      String
+  amount      Float
+  category    String
+  description String?
+  date        DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+model Expenses {
+  id          String   @id @default(cuid()) @map("_id")
+  title       String
+  userId      String
+  amount      Float
+  category    String
+  description String?
+  date        DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+model Bills {
+  id         String   @id @default(cuid()) @map("_id")
+  billName   String
+  userId     String
+  billAmount Float
+  billNote   String?
+  original   Boolean  @default(false)
+  frequency  Int      @default(1)
+  dueDate    DateTime
+  isPaid     Boolean  @default(false)
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model UserSalarySettings {
+  id         String @id @default(cuid()) @map("_id")
+  userId     String @unique
+  payday     String
+  hourlyRate Float
+  startDay   Float
+  overtime   Float
+  taxRate    Float
+  user       User?  @relation(fields: [userId], references: [id])
+}
+
+model Salary {
+  id     String   @id @default(cuid()) @map("_id")
+  userId String   @unique
+  date   DateTime @default(now())
+  shifts Shift[]
+  user   User     @relation(fields: [userId], references: [id])
+}
+
+model Shift {
+  id         String   @id @default(cuid()) @map("_id")
+  userId     String
+  overtime   Float    @default(0)
+  hourWorked Float
+  date       DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id])
+  Salary     Salary?  @relation(fields: [salaryId], references: [id])
+  salaryId   String?
+}
+
+model FinanicalGoals {
+  id              String   @id @default(cuid()) @map("_id")
+  userId          String
+  goalName        String
+  goalAmount      Float
+  goalProgress    Float    @default(0)
+  goalDescription String?
+  goalDeadline    DateTime
+  goalCreated     DateTime @default(now())
+  description     String?
+  user            User     @relation(fields: [userId], references: [id])
+}
