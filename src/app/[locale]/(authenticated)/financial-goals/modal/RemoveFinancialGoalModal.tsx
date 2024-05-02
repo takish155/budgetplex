@@ -1,3 +1,5 @@
+"use client";
+
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -13,6 +15,7 @@ import { useTranslations } from "next-intl";
 import React from "react";
 import { Trash2 } from "lucide-react";
 import RemoveFinancialGoalButton from "../component/RemoveFinancialGoalButton";
+import { useDialogStates } from "@/states/dialogStates";
 
 const RemoveFinancialGoalModal = ({
   id,
@@ -22,9 +25,15 @@ const RemoveFinancialGoalModal = ({
   goalName: string;
 }) => {
   const t = useTranslations("FinancialGoals");
+  const { isRemoveFinancialGoalModalOpen, toggleRemoveFinancialGoalModal } =
+    useDialogStates();
+
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
+    <AlertDialog open={isRemoveFinancialGoalModalOpen}>
+      <AlertDialogTrigger
+        asChild
+        onClick={() => toggleRemoveFinancialGoalModal()}
+      >
         <Button variant={"link"}>
           <Trash2 />
           <p className="sr-only">{t("removeGoal")}</p>
@@ -40,7 +49,10 @@ const RemoveFinancialGoalModal = ({
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel asChild>
+          <AlertDialogCancel
+            asChild
+            onClick={() => toggleRemoveFinancialGoalModal()}
+          >
             <Button variant={"outline"}>{t("cancel")}</Button>
           </AlertDialogCancel>
           <RemoveFinancialGoalButton id={id} />

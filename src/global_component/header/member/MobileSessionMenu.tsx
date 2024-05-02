@@ -16,7 +16,7 @@ const MobileSessionMenu = () => {
   return (
     <Sheet open={isOpen}>
       <SheetTrigger className="md:hidden" asChild onClick={() => toggleMenu()}>
-        <Menu />
+        <Menu size={30} className="ml-2" />
       </SheetTrigger>
       <SheetContent side={"left"}>
         <AuthenticatedMenu />

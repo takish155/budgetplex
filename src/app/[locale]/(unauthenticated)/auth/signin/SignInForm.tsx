@@ -4,11 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
 import { useTranslations } from "next-intl";
-import { ClipLoader } from "react-spinners";
 import React from "react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import useSignInHandler from "@/hooks/useSignInHandler";
 import { SignInErrors } from "@/schema/signInSchema";
+import Spinner from "@/components/Spinner";
 
 const SignInForm = ({
   username,
@@ -57,7 +57,7 @@ const SignInForm = ({
           </p>
         )}
       </div>
-      {!isPending ? <Button type="submit">{signIn}</Button> : <ClipLoader />}
+      {!isPending ? <Button type="submit">{signIn}</Button> : <Spinner />}
     </form>
   );
 };

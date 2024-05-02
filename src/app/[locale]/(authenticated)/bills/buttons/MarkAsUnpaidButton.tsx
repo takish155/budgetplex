@@ -1,10 +1,10 @@
 "use client";
 
+import Spinner from "@/components/Spinner";
 import { Button } from "@/components/ui/button";
 import usePaidBillHandler from "@/hooks/usePaidBillHandler";
 import { useTranslations } from "next-intl";
 import React from "react";
-import { ClipLoader } from "react-spinners";
 
 const MarkAsUnpaidButton = ({ billId }: { billId: string }) => {
   const t = useTranslations("BillInfo");
@@ -20,7 +20,7 @@ const MarkAsUnpaidButton = ({ billId }: { billId: string }) => {
           {t("markAsUnpaid")}
         </Button>
       ) : (
-        <ClipLoader />
+        <Spinner />
       )}
     </>
   );

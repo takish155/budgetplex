@@ -6,9 +6,9 @@ import { DatePickerForUpdate } from "@/components/ui/date-picker-for-update";
 import { Input } from "@/components/ui/input";
 import { useTranslations } from "next-intl";
 import React from "react";
-import { ClipLoader } from "react-spinners";
 import { useUpdateUserSalarySettingsHandler } from "../hooks/useUpdateUserSalarySettingsHandler";
 import { UserSalarySettingsModalProps } from "../types/shift.type";
+import Spinner from "@/components/Spinner";
 
 const UpdateUserSalarySettingsForm = ({
   data,
@@ -93,7 +93,7 @@ const UpdateUserSalarySettingsForm = ({
           <p className="text-red-500 text-sm">{t("invalidPaydayDateError")}</p>
         )}
       </FormField>
-      {isPending ? <ClipLoader /> : <Button>{t("configure")}</Button>}
+      {isPending ? <Spinner /> : <Button>{t("configure")}</Button>}
     </form>
   );
 };

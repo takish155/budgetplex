@@ -1,3 +1,5 @@
+"use client";
+
 import {
   AlertDialog,
   AlertDialogContent,
@@ -10,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import React from "react";
 import AddProgressToGoalForm from "../form/AddProgressToGoalForm";
+import { useDialogStates } from "@/states/dialogStates";
 
 const AddProgressModal = ({
   id,
@@ -19,9 +22,11 @@ const AddProgressModal = ({
   goalName: string;
 }) => {
   const t = useTranslations("FinancialGoals");
+  const { isAddProgressModalOpen, toggleAddProgressModal } = useDialogStates();
+
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
+    <AlertDialog open={isAddProgressModalOpen}>
+      <AlertDialogTrigger asChild onClick={() => toggleAddProgressModal()}>
         <Button>{t("addProgress")}</Button>
       </AlertDialogTrigger>
       <AlertDialogContent className="max-w-[500px]">

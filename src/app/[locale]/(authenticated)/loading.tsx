@@ -1,8 +1,12 @@
+import Spinner from "@/components/Spinner";
 import React from "react";
-import { ClipLoader } from "react-spinners";
 
 const loading = () => {
-  return <ClipLoader color={"white"} className="m-8" />;
+  return (
+    <div className="m-8">
+      <Spinner />
+    </div>
+  );
 };
 
 export default loading;

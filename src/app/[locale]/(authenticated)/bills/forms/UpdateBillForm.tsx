@@ -12,9 +12,9 @@ import { AddBillErrors, AddBillType } from "@/schema/addBillSchema";
 import { useTranslations } from "next-intl";
 import React from "react";
 import { Controller } from "react-hook-form";
-import { ClipLoader } from "react-spinners";
 import MarkAsUnpaidButton from "../buttons/MarkAsUnpaidButton";
 import MarkAsPaidButton from "../buttons/MarkAsPaidButton";
+import Spinner from "@/components/Spinner";
 
 const UpdateBillForm = ({
   data,
@@ -123,7 +123,7 @@ const UpdateBillForm = ({
           )}
         </div>
       ) : (
-        <ClipLoader />
+        <Spinner />
       )}
     </form>
   );

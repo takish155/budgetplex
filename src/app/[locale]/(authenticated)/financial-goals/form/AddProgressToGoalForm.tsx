@@ -8,10 +8,13 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import Spinner from "@/components/Spinner";
 import { AlertDialogCancel } from "@/components/ui/alert-dialog";
+import { useDialogStates } from "@/states/dialogStates";
 
 const AddProgressToGoalForm = ({ id }: { id: string }) => {
   const { isPending, mutate, progressValue, setProgressValue } =
     useAddProgressToGoalHandler();
+  const { toggleAddProgressModal } = useDialogStates();
+
   const t = useTranslations("FinancialGoals");
 
   return (
@@ -38,7 +41,11 @@ const AddProgressToGoalForm = ({ id }: { id: string }) => {
             <Spinner />
           )}
         </AlertDialogCancel>
-        <AlertDialogCancel asChild>
+        <AlertDialogCancel
+          asChild
+          disabled={isPending}
+          onClick={() => toggleAddProgressModal()}
+        >
           <Button variant="outline">{t("cancel")}</Button>
         </AlertDialogCancel>
       </div>

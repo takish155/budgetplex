@@ -6,20 +6,18 @@ import { SalaryStatistic } from "../statistic/SalaryStatistic";
 import AddShiftFormModal from "../modal/AddShiftFormModal";
 import { getSalaryDates } from "@/lib/getSalaryDates";
 import dynamic from "next/dynamic";
-import { ClipLoader } from "react-spinners";
 import RenderTableList from "../render/RenderTableList";
+import Spinner from "@/components/Spinner";
 
 const UserSalarySettingsModal = dynamic(
   () => import("../modal/UserSalarySettingsModal"),
   {
     ssr: false,
-    loading: () => <ClipLoader color={"white"} size={25} className="mx-4" />,
-  }
-);
-const SalaryHistoryModal = dynamic(
-  () => import("../modal/SalaryHistoryModal"),
-  {
-    loading: () => <ClipLoader color={"white"} size={25} className="mx-4" />,
+    loading: () => (
+      <div className="mx-4">
+        <Spinner />
+      </div>
+    ),
   }
 );
 
@@ -50,7 +48,6 @@ const page = async ({ params }: { params: { index?: string } }) => {
               monthStartDate: response.data?.startDay ?? 0,
             }}
           />
-          <SalaryHistoryModal />
         </div>
       </div>
       <SalaryStatistic

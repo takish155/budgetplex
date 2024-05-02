@@ -30,7 +30,7 @@ const AuthenticatedMenu = () => {
         <menu className="mb-8">
           <Link
             passHref
-            href={`/${locale}/dashboard`}
+            href={`/${locale}/dashboard/0`}
             onClick={() => handleCloseMenu()}
           >
             <li
@@ -59,7 +59,7 @@ const AuthenticatedMenu = () => {
             </li>
           </Link>
           <Link
-            href={`/${locale}/salary`}
+            href={`/${locale}/salary/0`}
             onClick={() => handleCloseMenu()}
             passHref
           >
@@ -75,7 +75,7 @@ const AuthenticatedMenu = () => {
             </li>
           </Link>
           <Link
-            href={`/${locale}/financial-goals`}
+            href={`/${locale}/financial-goals/`}
             onClick={() => handleCloseMenu()}
             passHref
           >

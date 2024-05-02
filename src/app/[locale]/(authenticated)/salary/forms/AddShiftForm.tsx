@@ -6,11 +6,11 @@ import { Controller } from "react-hook-form";
 import useAddShiftHandler from "../hooks/useAddShiftHandler";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { ClipLoader } from "react-spinners";
 import { ShiftDatePicker } from "@/components/ui/date-picker-for-shifts";
 import { trpc } from "@/context/QueryProvider";
 import { getSalaryDates } from "@/lib/getSalaryDates";
 import SheetFormSkeleton from "../skeleton/SheetFormSkeleton";
+import Spinner from "@/components/Spinner";
 
 const AddShiftForm = () => {
   const t = useTranslations("Salary");
@@ -59,7 +59,7 @@ const AddShiftForm = () => {
       {!isPending ? (
         <Button type="submit">{t("addShift")}</Button>
       ) : (
-        <ClipLoader />
+        <Spinner />
       )}
     </form>
   );

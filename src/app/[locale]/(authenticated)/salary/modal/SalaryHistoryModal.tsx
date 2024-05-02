@@ -11,6 +11,7 @@ import React from "react";
 import SalaryDialogHeader from "../component/SalaryDialogHeader";
 import RenderSalaryHistoryList from "../render/RenderSalaryHistoryList";
 import { useTranslations } from "next-intl";
+import { useDialogStates } from "@/states/dialogStates";
 
 const SalaryHistoryModal = () => {
   const t = useTranslations("Salary");

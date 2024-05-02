@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 import React from "react";
 import { useSetupSalaryManagerHandler } from "../hooks/useSetupSalaryManagerHandler";
 import { Controller } from "react-hook-form";
-import { ClipLoader } from "react-spinners";
+import Spinner from "@/components/Spinner";
 
 const SetupSalaryManagerForm = () => {
   const t = useTranslations("Salary");
@@ -71,7 +71,7 @@ const SetupSalaryManagerForm = () => {
           <p className="text-red-500 text-sm">{t("invalidPaydayDateError")}</p>
         )}
       </FormField>
-      {isPending ? <ClipLoader /> : <Button>{t("configure")}</Button>}
+      {isPending ? <Spinner /> : <Button>{t("configure")}</Button>}
     </form>
   );
 };

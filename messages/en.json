@@ -117,9 +117,9 @@
     "salary": "Salary Manager",
     "financialGoals": "Financial Goals",
     "addFinancialGoal": "Add Financial Goal",
-    "salaryManager": "Salary Manager",
-    "billManager": "Bill Manager",
-    "goalManager": "Goal Manager",
+    "salaryManager": "Salary",
+    "billManager": "Bills",
+    "goalManager": "Goals",
     "accountHeader": "Account",
     "setting": "Settings",
     "signOut": "Sign Out"

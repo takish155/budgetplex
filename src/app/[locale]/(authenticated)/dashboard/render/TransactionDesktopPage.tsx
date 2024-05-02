@@ -3,7 +3,6 @@ import React from "react";
 import TransactionTableHeader from "../transaction_table/desktop/TransactionTableHeader";
 import dynamic from "next/dynamic";
 import TableBodySkeleton from "../transaction_table/desktop/TableBodySkeleton";
-import { ClipLoader } from "react-spinners";
 
 const TransactionTableBody = dynamic(
   () => import("../transaction_table/desktop/TransactionTableBody"),

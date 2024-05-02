@@ -1,6 +1,7 @@
 "use client";
 
 import removeBillAction from "@/app/api/user/bill/removeBillAction";
+import Spinner from "@/components/Spinner";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,6 +15,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import useDeleteBillHandler from "@/hooks/useDeleteBillHandler";
+import { useDialogStates } from "@/states/dialogStates";
 import { Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -25,10 +27,11 @@ const DelateModal = ({
   billName: string;
 }) => {
   const t = useTranslations("BillInfo");
-  const { mutate } = useDeleteBillHandler();
+  const { mutate, isPending } = useDeleteBillHandler();
+  const { toggleDeleteModal, isDelateModalOpen } = useDialogStates();
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
+    <AlertDialog open={isDelateModalOpen}>
+      <AlertDialogTrigger asChild onClick={() => toggleDeleteModal()}>
         <Button variant="link">
           <Trash2 color={"red"} />
           <p className="sr-only">{t("deleteBill")}</p>
@@ -44,10 +47,16 @@ const DelateModal = ({
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
-          <AlertDialogAction onClick={() => mutate(billId)}>
-            {t("confirm")}
-          </AlertDialogAction>
+          <AlertDialogCancel disabled={isPending}>
+            {t("cancel")}
+          </AlertDialogCancel>
+          {isPending ? (
+            <Spinner />
+          ) : (
+            <AlertDialogAction onClick={() => mutate(billId)}>
+              {t("confirm")}
+            </AlertDialogAction>
+          )}
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

@@ -18,11 +18,11 @@ import { Label } from "@radix-ui/react-label";
 import { useTranslations } from "next-intl";
 import React from "react";
 import { Controller, Form } from "react-hook-form";
-import { ClipLoader } from "react-spinners";
 import { TransactionData } from "../types/transactionData.type";
 import useDeleteTransactionHandler from "../hooks/useDeleteTransactionHandler";
 import FormField from "@/components/FormField";
 import { AddTransactionErrors } from "@/schema/addTransactionSchema";
+import Spinner from "@/components/Spinner";
 
 const UpdateTransactionForm = ({
   title,
@@ -141,7 +141,7 @@ const UpdateTransactionForm = ({
         )}
       </FormField>
       {isDeletePending || isUpdatePending ? (
-        <ClipLoader />
+        <Spinner />
       ) : (
         <div className="flex gap-8 flex-wrap">
           <Button type="submit">{t("updateTransaction")}</Button>

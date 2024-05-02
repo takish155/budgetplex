@@ -22,7 +22,7 @@ const MobileMenu = ({
   if (isOpen) {
     return (
       <nav className="w-full h-[100vh] overflow-hidden sticky bot-0 bg-inherit p-4">
-        <ul className="text-xl">
+        <ul className="text-4xl mb-4">
           <li
             className={`${pathName === `/${locale}` ? "font-bold" : ""} mb-2 `}
           >
@@ -35,7 +35,7 @@ const MobileMenu = ({
               pathName === `/${locale}/auth/signin` ? "font-bold" : ""
             } mb-2 `}
           >
-            <Link onClick={() => closeMenu()} href="/">
+            <Link onClick={() => closeMenu()} href="/auth/signin">
               {login}
             </Link>
           </li>

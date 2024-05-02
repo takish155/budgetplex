@@ -2,7 +2,12 @@
 
 import { Card } from "@/components/ui/card";
 import useSessionMenu from "@/states/sessionMenuState";
-import { DollarSign, GanttChartSquareIcon, HandCoinsIcon } from "lucide-react";
+import {
+  DollarSign,
+  GanttChartSquareIcon,
+  GoalIcon,
+  HandCoinsIcon,
+} from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -14,12 +19,10 @@ const BottomTabNav = () => {
   const pathname = usePathname();
   const { isMobile } = useSessionMenu();
 
-  if (!isMobile) return null;
-
   return (
     <Card className="w-[100vw] fixed bottom-0 h-[15h]">
       <nav className="flex gap-4 justify-around items-center h-full">
-        <Link href={`/${locale}/dashboard`} passHref>
+        <Link href={`/${locale}/dashboard/0`} passHref>
           <div
             className={`py-2 flex flex-col justify-center items-center ${
               pathname.includes("dashboard") ? "text-primary" : ""
@@ -41,7 +44,7 @@ const BottomTabNav = () => {
             <p className="text-paragraph font-light pt-1">{t("bills")}</p>
           </div>
         </Link>
-        <Link href={`/${locale}/salary`} passHref>
+        <Link href={`/${locale}/salary/0`} passHref>
           <div
             className={`py-2 flex flex-col justify-center items-center ${
               pathname.includes("salary") ? "text-primary" : ""
@@ -50,6 +53,18 @@ const BottomTabNav = () => {
             <DollarSign size={25} />
             <p className="text-paragraph font-light pt-1">
               {t("salaryManager")}
+            </p>
+          </div>
+        </Link>
+        <Link href={`/${locale}/salary/financial-goals`} passHref>
+          <div
+            className={`py-2 flex flex-col justify-center items-center ${
+              pathname.includes("financial-goals") ? "text-primary" : ""
+            }`}
+          >
+            <GoalIcon size={25} />
+            <p className="text-paragraph font-light pt-1">
+              {t("financialGoals")}
             </p>
           </div>
         </Link>

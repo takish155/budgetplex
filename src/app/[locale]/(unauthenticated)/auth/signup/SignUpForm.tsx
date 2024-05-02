@@ -1,5 +1,6 @@
 "use client";
 
+import Spinner from "@/components/Spinner";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,7 +9,6 @@ import { SignUpError } from "@/schema/signUpSchema";
 import { Label } from "@radix-ui/react-label";
 import { useTranslations } from "next-intl";
 import React from "react";
-import { ClipLoader } from "react-spinners";
 
 const SignUpForm = ({
   username,
@@ -92,7 +92,7 @@ const SignUpForm = ({
       {formStatus.status !== "LOADING" ? (
         <Button type="submit">{t("signup")}</Button>
       ) : (
-        <ClipLoader />
+        <Spinner />
       )}
     </form>
   );

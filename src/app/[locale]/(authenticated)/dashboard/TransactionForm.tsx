@@ -1,5 +1,6 @@
 "use client";
 
+import Spinner from "@/components/Spinner";
 import { Button } from "@/components/ui/button";
 import { Combobox } from "@/components/ui/combobox";
 import { Input } from "@/components/ui/input";
@@ -17,7 +18,6 @@ import { Label } from "@radix-ui/react-label";
 import { useTranslations } from "next-intl";
 import React from "react";
 import { Controller } from "react-hook-form";
-import { ClipLoader } from "react-spinners";
 
 const TransactionForm = () => {
   const t = useTranslations("AddTransaction");
@@ -115,7 +115,7 @@ const TransactionForm = () => {
         )}
       </div>
       {isPending ? (
-        <ClipLoader />
+        <Spinner />
       ) : (
         <Button type="submit">{t("addTransaction")}</Button>
       )}

@@ -3,16 +3,15 @@
 import FormField from "@/components/FormField";
 import { useTranslations } from "next-intl";
 import { Controller } from "react-hook-form";
-import { DatePickerForUpdate } from "@/components/ui/date-picker-for-update";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { ClipLoader } from "react-spinners";
 import { AddShiftType } from "@/schema/addShiftSchema";
 import useUpdateShiftHandler from "../hooks/useUpdateShiftHandler";
 import SheetFormSkeleton from "../skeleton/SheetFormSkeleton";
 import { trpc } from "@/context/QueryProvider";
 import { ShiftDatePicker } from "@/components/ui/date-picker-for-shifts";
 import { getSalaryDates } from "@/lib/getSalaryDates";
+import Spinner from "@/components/Spinner";
 
 const UpdateShiftForm = ({ data, id }: { data: AddShiftType; id: string }) => {
   const t = useTranslations("Salary");
@@ -71,7 +70,7 @@ const UpdateShiftForm = ({ data, id }: { data: AddShiftType; id: string }) => {
       {!isPending ? (
         <Button type="submit">{t("addShift")}</Button>
       ) : (
-        <ClipLoader />
+        <Spinner />
       )}
     </form>
   );
