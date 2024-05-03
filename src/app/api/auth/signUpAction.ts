@@ -4,6 +4,8 @@ import { SignUpSchema, signUpSchema } from "@/schema/signUpSchema";
 import { getTranslations } from "next-intl/server";
 import bcrypt from "bcrypt";
 import { ResponseStatus } from "@/types/responseStatus";
+import prisma from "../../../../lib/prisma";
+import { redirect } from "next/navigation";
 
 export const signUpAction = async (
   data: SignUpSchema
@@ -14,6 +16,10 @@ export const signUpAction = async (
 
     if (!isValidData.success) {
       throw new Error("Invalid data");
+    }
+
+    if (data.password !== data.confirmPassword) {
+      throw new Error(t("passwordsDontMatchError"));
     }
 
     const usernameExist = await prisma?.user.findUnique({

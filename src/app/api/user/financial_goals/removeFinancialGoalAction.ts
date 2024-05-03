@@ -3,6 +3,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { getUserId } from "../../api_util/getUserId";
 import { revalidatePath } from "next/cache";
+import prisma from "../../../../../lib/prisma";
 
 const removeFinancialGoalAction = async (id: string) => {
   try {

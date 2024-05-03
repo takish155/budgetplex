@@ -1,3 +1,5 @@
+import { dateToString } from "@/lib/dateToString";
+import { useLocale } from "next-intl";
 import React from "react";
 
 interface DisplayDateProps {
@@ -6,10 +8,14 @@ interface DisplayDateProps {
 }
 
 const DisplayDate = ({ date, heading }: DisplayDateProps) => {
+  const locale = useLocale();
+
   return (
     <div>
       <h3 className="text-paragraph font-light">{heading}</h3>
-      <h3 className="text-miniheader font-bold">{date.toLocaleDateString()}</h3>
+      <h3 className="text-miniheader font-bold">
+        {dateToString(date, locale)}
+      </h3>
     </div>
   );
 };

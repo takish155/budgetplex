@@ -1,8 +1,6 @@
 "use server";
 
-import { getServerSession } from "next-auth";
 import prisma from "../../../../../lib/prisma";
-import { useTranslations } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 import { getUserId } from "../../api_util/getUserId";
 import { revalidatePath } from "next/cache";

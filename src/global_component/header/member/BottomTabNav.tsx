@@ -19,6 +19,10 @@ const BottomTabNav = () => {
   const pathname = usePathname();
   const { isMobile } = useSessionMenu();
 
+  if (!isMobile) {
+    return null;
+  }
+
   return (
     <Card className="w-[100vw] fixed bottom-0 h-[15h]">
       <nav className="flex gap-4 justify-around items-center h-full">
@@ -56,7 +60,7 @@ const BottomTabNav = () => {
             </p>
           </div>
         </Link>
-        <Link href={`/${locale}/salary/financial-goals`} passHref>
+        <Link href={`/${locale}/financial-goals`} passHref>
           <div
             className={`py-2 flex flex-col justify-center items-center ${
               pathname.includes("financial-goals") ? "text-primary" : ""

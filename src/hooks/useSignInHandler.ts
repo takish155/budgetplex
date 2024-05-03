@@ -5,8 +5,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ResponseStatus } from "@/types/responseStatus";
 import { useMutation } from "@tanstack/react-query";
 import { signIn } from "next-auth/react";
-import { redirect } from "next/navigation";
-import { useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const useSignInHandler = () => {
   const [formStatus, setFormStatus] = useState<ResponseStatus>({
@@ -20,7 +21,8 @@ const useSignInHandler = () => {
   } = useForm<SignInSchema>({
     resolver: zodResolver(signInSchema),
   });
-  const locale = useLocale();
+  const t = useTranslations("SigninPage");
+  const router = useRouter();
 
   const { isPending, mutate } = useMutation({
     mutationFn: async (data: SignInSchema) =>
@@ -34,7 +36,8 @@ const useSignInHandler = () => {
         setFormStatus({ message: "signInError", status: "ERROR" });
       } else {
         setFormStatus({ message: "signInSuccess", status: "SUCCESS" });
-        redirect(`/${locale}/dashboard`);
+        toast.success(t("signInSuccess"));
+        router.refresh();
       }
     },
   });

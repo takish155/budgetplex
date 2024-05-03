@@ -6,6 +6,9 @@ import { useMutation } from "@tanstack/react-query";
 import { SignUpSchema, signUpSchema } from "@/schema/signUpSchema";
 import { signUpAction } from "@/app/api/auth/signUpAction";
 import { signIn } from "next-auth/react";
+import { toast } from "sonner";
+import { redirect, useRouter } from "next/navigation";
+import { useLocale } from "next-intl";
 
 const useSignUpHandler = () => {
   const [formStatus, setFormStatus] = useState<ResponseStatus>({
@@ -20,10 +23,8 @@ const useSignUpHandler = () => {
     resolver: zodResolver(signUpSchema),
   });
 
-  const { isPending, mutate } = useMutation({
-    mutationFn: async (data: SignUpSchema) => await signUpAction(data),
-    onSettled: (res) => setFormStatus(res!),
-  });
+  const locale = useLocale();
+  const router = useRouter();
 
   const submitHandler = async (data: SignUpSchema) => {
     setFormStatus({ message: "", status: "LOADING" });
@@ -31,11 +32,13 @@ const useSignUpHandler = () => {
       const response = await signUpAction(data);
       setFormStatus(response);
       if (response.status === "SUCCESS") {
+        toast.success(response.message);
         await signIn("credentials", {
           redirect: false,
           username: data.username,
           password: data.password,
         });
+        router.refresh();
       }
     } catch (err) {
       setFormStatus({ message: "Something went wrong", status: "ERROR" });
@@ -45,7 +48,6 @@ const useSignUpHandler = () => {
   return {
     formStatus,
     handleSubmit,
-    isPending,
     submitHandler,
     register,
     errors,

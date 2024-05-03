@@ -5,6 +5,7 @@ import { ResponseStatus } from "@/types/responseStatus";
 import { getServerSession } from "next-auth";
 import { getLocale, getTranslations } from "next-intl/server";
 import { revalidatePath } from "next/cache";
+import prisma from "../../../../../lib/prisma";
 
 const updateUserSalarySettingsAction = async (
   data: SetupSalaryManager

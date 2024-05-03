@@ -2,7 +2,6 @@
 
 import { getServerSession } from "next-auth";
 import prisma from "../../../../../lib/prisma";
-import { redirect } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
 import { revalidatePath } from "next/cache";
 import { ResponseStatus } from "@/types/responseStatus";

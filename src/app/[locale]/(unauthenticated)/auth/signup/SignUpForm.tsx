@@ -23,14 +23,8 @@ const SignUpForm = ({
   email: string;
   signup: string;
 }) => {
-  const {
-    errors,
-    formStatus,
-    handleSubmit,
-    isPending,
-    submitHandler,
-    register,
-  } = useSignUpHandler();
+  const { errors, formStatus, handleSubmit, submitHandler, register } =
+    useSignUpHandler();
   const t = useTranslations("SignupPage");
 
   return (

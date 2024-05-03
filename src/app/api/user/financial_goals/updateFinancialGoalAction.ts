@@ -1,9 +1,6 @@
 "use server";
 
-import {
-  AddFinancialGoal,
-  addFinancialGoalSchema,
-} from "@/app/[locale]/(authenticated)/financial-goals/types/addFinancialGoalSchema";
+import { addFinancialGoalSchema } from "@/app/[locale]/(authenticated)/financial-goals/types/addFinancialGoalSchema";
 import { getUserId } from "../../api_util/getUserId";
 import prisma from "../../../../../lib/prisma";
 import { getLocale, getTranslations } from "next-intl/server";
