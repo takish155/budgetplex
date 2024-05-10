@@ -1,11 +1,13 @@
 import addTransactionAction from "@/app/api/user/transaction/addTransactionAction";
+import { trpc } from "@/context/QueryProvider";
 import {
   AddTransactionType,
   addTransactionSchema,
 } from "@/schema/addTransactionSchema";
 import { ResponseStatus } from "@/types/responseStatus";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { getQueryKey } from "@trpc/react-query";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -33,10 +35,18 @@ const useAddTransactionHandler = () => {
       setFormStatus(response!);
       if (response?.status === "SUCCESS") {
         toast.success(response.message);
+        queryClient.invalidateQueries({
+          queryKey: transactionQueryKey,
+        });
+        queryClient.invalidateQueries({ queryKey: balanceQueryKey });
         reset();
       }
     },
   });
+
+  const queryClient = useQueryClient();
+  const transactionQueryKey = getQueryKey(trpc.balance.getTransactionHistory);
+  const balanceQueryKey = getQueryKey(trpc.balance.getBalance);
 
   return {
     formStatus,

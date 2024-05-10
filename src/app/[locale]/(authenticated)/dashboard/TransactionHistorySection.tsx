@@ -1,28 +1,22 @@
-"use client";
-
-import React, { useEffect } from "react";
+import React from "react";
 import TransactionDesktopPage from "./render/TransactionDesktopPage";
 import dynamic from "next/dynamic";
-import { TransactionData } from "./types/transactionData.type";
 import MobileTableSkeleton from "./transaction_table/MobileTableSkeleton";
-import useSessionMenu from "@/states/sessionMenuState";
-import { useTransactionData } from "@/states/transactionDataState";
 
 const TransactionMobilePage = dynamic(
   () => import("./render/TransactionMobilePage"),
-  { ssr: false, loading: () => <MobileTableSkeleton count={5} /> }
+  {
+    ssr: false,
+    loading: () => <MobileTableSkeleton count={5} className="md:hidden" />,
+  }
 );
 
-const TransactionHistorySection = ({ data }: { data: TransactionData[] }) => {
-  const { isMobile } = useSessionMenu();
-  const { setTransactionData, transactionData } = useTransactionData();
-
-  useEffect(() => {
-    setTransactionData(data);
-  }, [transactionData, data, setTransactionData]);
-
+const TransactionHistorySection = () => {
   return (
-    <>{!isMobile ? <TransactionDesktopPage /> : <TransactionMobilePage />}</>
+    <>
+      <TransactionDesktopPage />
+      <TransactionMobilePage />
+    </>
   );
 };
 

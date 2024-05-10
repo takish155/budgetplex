@@ -11,6 +11,7 @@ const LanguageButton = () => {
 
   return (
     <button
+      className="mr-4 hover:text-primary"
       onClick={() => {
         if (locale === "en") {
           router.push(pathname.replace(/en/, "ja"));

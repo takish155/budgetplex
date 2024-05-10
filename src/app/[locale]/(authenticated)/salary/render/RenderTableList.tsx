@@ -1,7 +1,6 @@
 "use client";
 
-import useSessionMenu from "@/states/sessionMenuState";
-import React, { useEffect } from "react";
+import React from "react";
 import { ShiftTableProps } from "../types/shift.type";
 import dynamic from "next/dynamic";
 import MobileTableSkeleton from "../../dashboard/transaction_table/MobileTableSkeleton";
@@ -9,19 +8,14 @@ import ShiftTable from "../shifts/pc/ShiftTable";
 
 const MobileRenderShift = dynamic(() => import("./MobileRenderShift"), {
   ssr: false,
-  loading: () => <MobileTableSkeleton count={5} />,
+  loading: () => <MobileTableSkeleton count={5} className="md:hidden" />,
 });
 
 const RenderTableList = ({ data }: { data: ShiftTableProps }) => {
-  const { isMobile } = useSessionMenu();
-
   return (
     <>
-      {!isMobile ? (
-        <ShiftTable data={data} />
-      ) : (
-        <MobileRenderShift data={data} />
-      )}
+      <ShiftTable data={data} />
+      <MobileRenderShift data={data} />
     </>
   );
 };

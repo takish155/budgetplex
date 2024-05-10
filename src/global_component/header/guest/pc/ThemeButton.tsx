@@ -10,14 +10,14 @@ const ThemeButton = () => {
   if (theme === "dark") {
     return (
       <button onClick={() => setTheme("light")}>
-        <Sun size={30} />
+        <Sun size={30} className="hover:text-primary" />
       </button>
     );
   }
 
   return (
     <button onClick={() => setTheme("dark")}>
-      <Moon size={30} />
+      <Moon size={30} className="hover:text-primary" />
     </button>
   );
 };

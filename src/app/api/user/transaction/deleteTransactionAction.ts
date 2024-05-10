@@ -3,7 +3,6 @@
 import { getServerSession } from "next-auth";
 import prisma from "../../../../../lib/prisma";
 import { getLocale, getTranslations } from "next-intl/server";
-import { revalidatePath } from "next/cache";
 import { ResponseStatus } from "@/types/responseStatus";
 
 const deleteTransactionAction = async (id: string): Promise<ResponseStatus> => {
@@ -50,7 +49,6 @@ const deleteTransactionAction = async (id: string): Promise<ResponseStatus> => {
       });
     }
 
-    revalidatePath(`/${locale}/dashboard`);
     return { message: t("deleteSuccessful"), status: "SUCCESS" };
   } catch (error) {
     if (error instanceof Error) {

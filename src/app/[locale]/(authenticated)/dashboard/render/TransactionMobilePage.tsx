@@ -1,13 +1,15 @@
+"use client";
+
 import React from "react";
 import TransactionCard from "../transaction_table/mobile/TransactionCard";
 import { TransactionData } from "../types/transactionData.type";
-import { useTransactionData } from "@/states/transactionDataState";
+import { useTransactionContext } from "@/context/TransactionProvider";
 
 const TransactionMobilePage = () => {
-  const { transactionData } = useTransactionData();
+  const { balanceDataHistory } = useTransactionContext() || {};
   return (
     <section className="md:hidden">
-      {transactionData.map((transaction) => {
+      {balanceDataHistory?.data!.map((transaction) => {
         return (
           <TransactionCard
             data={transaction as TransactionData}

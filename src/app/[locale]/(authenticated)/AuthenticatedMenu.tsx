@@ -30,7 +30,7 @@ const AuthenticatedMenu = () => {
         <menu className="mb-8">
           <Link
             passHref
-            href={`/${locale}/dashboard/0`}
+            href={`/${locale}/dashboard`}
             onClick={() => handleCloseMenu()}
           >
             <li

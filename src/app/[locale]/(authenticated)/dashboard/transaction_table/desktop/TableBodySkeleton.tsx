@@ -10,7 +10,7 @@ const TableBodySkeleton = ({
   cellCount: number;
 }) => {
   return (
-    <TableRow>
+    <>
       {[...Array(skeletonCount)].map((_, index) => (
         <TableRow key={index}>
           {[...Array(cellCount)].map((_, cellIndex) => {
@@ -22,7 +22,7 @@ const TableBodySkeleton = ({
           })}
         </TableRow>
       ))}
-    </TableRow>
+    </>
   );
 };
 

@@ -7,7 +7,8 @@ import { Input } from "@/components/ui/input";
 import useSignUpHandler from "@/hooks/useSignUpHandler";
 import { SignUpError } from "@/schema/signUpSchema";
 import { Label } from "@radix-ui/react-label";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import Link from "next/link";
 import React from "react";
 
 const SignUpForm = ({
@@ -26,6 +27,7 @@ const SignUpForm = ({
   const { errors, formStatus, handleSubmit, submitHandler, register } =
     useSignUpHandler();
   const t = useTranslations("SignupPage");
+  const locale = useLocale();
 
   return (
     <form onSubmit={handleSubmit((data) => submitHandler(data))}>
@@ -88,6 +90,15 @@ const SignUpForm = ({
       ) : (
         <Spinner />
       )}
+      <Link
+        href={`/${locale}/auth/signin`}
+        passHref
+        className="flex justify-end mt-4"
+      >
+        <Button variant={"link"} type="button">
+          {t("alreadyHaveAccount")}
+        </Button>
+      </Link>
     </form>
   );
 };

@@ -23,6 +23,7 @@ import useDeleteTransactionHandler from "../hooks/useDeleteTransactionHandler";
 import FormField from "@/components/FormField";
 import { AddTransactionErrors } from "@/schema/addTransactionSchema";
 import Spinner from "@/components/Spinner";
+import { SheetClose } from "@/components/ui/sheet";
 
 const UpdateTransactionForm = ({
   title,
@@ -152,7 +153,11 @@ const UpdateTransactionForm = ({
           >
             {t("deleteTransaction")}
           </Button>
-          <Button variant={"outline"}>{t("cancel")}</Button>
+          <SheetClose asChild>
+            <Button variant={"outline"} type="button">
+              {t("cancel")}
+            </Button>
+          </SheetClose>
         </div>
       )}
     </form>

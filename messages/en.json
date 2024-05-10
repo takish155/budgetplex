@@ -35,7 +35,9 @@
     "invailidUsernameError": "Invalid username",
     "invailidPasswordError": "Invalid password",
     "signInError": "Invalid username or password",
-    "signInSuccess": "Sign in successfully!"
+    "signInSuccess": "Sign in successfully!",
+    "forgotPassword": "Forgot password?",
+    "signUp": "Don't have an account? Sign up now!"
   },
   "SignupPage": {
     "title": "Sign Up",
@@ -53,7 +55,8 @@
     "passwordsDontMatchError": "Passwords don't match",
     "confirmPassword": "Confirm Password",
     "signup": "Create Your Account",
-    "signUpSuccess": "Sign up successfully!"
+    "signUpSuccess": "Sign up successfully!",
+    "alreadyHaveAccount": "Already have an account? Sign in now!"
   },
   "Dashboard": {
     "transaction": "Transaction",
@@ -105,7 +108,9 @@
     "deleteTransaction": "Delete Transaction",
     "cancel": "Cancel",
     "updateSuccessful": "Transaction updated successfully!",
-    "deleteSuccessful": "Transaction deleted successfully!"
+    "deleteSuccessful": "Transaction deleted successfully!",
+    "filter": "Filter: ",
+    "all": "All"
   },
   "AuthenticatedMenu": {
     "tools": "Tools",
@@ -285,5 +290,44 @@
     "passwordsDontMatchError": "Passwords don't match",
     "passwordUpdateSuccess": "Password updated successfully!",
     "save": "Save"
+  },
+  "VerificationPage": {
+    "title": "Verify your email",
+    "description": "We've sent a verification email to your {email}, please verify your email to continue",
+    "resend": "Resend verification email",
+    "errorTitle": "Error verifying email",
+    "verificationSuccess": "Email verified successfully!",
+    "verificationError": "Error verifying email, please try again later",
+    "resendSuccess": "Verification email sent successfully!",
+    "resendError": "Error sending verification email, please try again later",
+    "tokenInvalidOrExpired": "Token is either invalid or expired",
+    "resnedVerification": "Resend Verification Email",
+    "resendEmailInterval": "Resend already sent, please wait around {minutes} to resend again",
+    "reloadPage": "Refresh"
+  },
+  "ResetPassword": {
+    "forgotPassword": "Forget Password",
+    "ForgotPasswordDescription": "Enter your email to reset your password",
+    "email": "Email",
+    "send": "Send",
+    "submit": "Submit",
+    "invalidEmailError": "Invalid email address",
+    "tokenInvalidError": "Reset Password Error",
+    "tokenInvalidOrExpired": "Token is either invalid or expired",
+    "emailNotFoundError": "Email not found, please try another one",
+    "resetPassword": "Reset Password",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "resetPasswordDescription": "Enter your new password, please keep it safe",
+    "resetPasswordSuccess": "Reset changed successfully!",
+    "resetPasswordInterval": "Reset password email already sent, please wait around {minutes} to resend again"
+  },
+  "Errors": {
+    "404title": "404 Page not found",
+    "errorTitle": "Error",
+    "errorDescription": "An error occurred, please try again later",
+    "errorMessage": "Error message: ",
+    "404description": "The page you're looking for doesn't exist. Please check the URL and try again",
+    "returnHome": "Return Home"
   }
 }

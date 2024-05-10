@@ -1,24 +1,29 @@
-import { caller } from "@/server";
+"use client";
+
 import React from "react";
 import DisplayAmount from "../../../../../components/DisplayAmount";
-import { getTranslations } from "next-intl/server";
-import FilterToLastMonthSection from "../../salary/component/FilterToLastMonthSection";
-import FilterToNextMonthSection from "../../salary/component/FilterToNextMonthSection";
+import { useTranslations } from "next-intl";
+import { useTransactionContext } from "@/context/TransactionProvider";
 
-const Balance = async ({ index }: { index: string }) => {
-  const data = await caller.balance.getBalance({
-    index: Number(index),
-  });
-  const t = await getTranslations("Dashboard");
+const Balance = () => {
+  const { balanceData: data, balanceIsLoading } = useTransactionContext() || {};
+  const t = useTranslations("Dashboard");
 
   return (
     <section className="flex justify-between mb-11 flex-wrap gap-8">
-      <FilterToLastMonthSection />
-      <FilterToNextMonthSection />
-      <DisplayAmount amount={data.expenses} type={t("expense")} />
-      <DisplayAmount amount={data.income} type={t("income")} />
       <DisplayAmount
-        amount={data.income - data.expenses}
+        amount={data?.expenses ?? 0}
+        type={t("expense")}
+        isLoading={balanceIsLoading}
+      />
+      <DisplayAmount
+        amount={data?.income ?? 0}
+        type={t("income")}
+        isLoading={balanceIsLoading}
+      />
+      <DisplayAmount
+        isLoading={balanceIsLoading}
+        amount={data?.income! - data?.expenses! ?? 0}
         type={t("remaining")}
       />
     </section>

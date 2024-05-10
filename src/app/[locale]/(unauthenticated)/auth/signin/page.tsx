@@ -5,18 +5,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  NextIntlClientProvider,
-  useMessages,
-  useTranslations,
-} from "next-intl";
+import { useMessages, useTranslations } from "next-intl";
 import React from "react";
 import SignInForm from "./SignInForm";
-import { pick } from "lodash";
 
 const page = () => {
   const t = useTranslations!("SigninPage");
-  const messages = useMessages!();
 
   return (
     <main>
@@ -27,13 +21,11 @@ const page = () => {
             <CardDescription>{t("description")}</CardDescription>
           </CardHeader>
           <CardContent>
-            <NextIntlClientProvider messages={messages}>
-              <SignInForm
-                username={t("username")}
-                password={t("password")}
-                signIn={t("signIn")}
-              />
-            </NextIntlClientProvider>
+            <SignInForm
+              username={t("username")}
+              password={t("password")}
+              signIn={t("signIn")}
+            />
           </CardContent>
         </Card>
       </section>

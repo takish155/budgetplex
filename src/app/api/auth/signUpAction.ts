@@ -5,7 +5,7 @@ import { getTranslations } from "next-intl/server";
 import bcrypt from "bcrypt";
 import { ResponseStatus } from "@/types/responseStatus";
 import prisma from "../../../../lib/prisma";
-import { redirect } from "next/navigation";
+import sendVerificationEmail from "../api_util/sendVerificationEmail";
 
 export const signUpAction = async (
   data: SignUpSchema
@@ -38,13 +38,15 @@ export const signUpAction = async (
 
     const hashedPassword = await bcrypt.hash(data.password, 10);
 
-    await prisma?.user.create({
+    const user = await prisma?.user.create({
       data: {
         username: data.username,
         email: data.email,
         hashedPassword,
       },
     });
+
+    await sendVerificationEmail(user.id, data.email);
 
     return { message: t("signUpSuccess"), status: "SUCCESS" };
   } catch (error) {

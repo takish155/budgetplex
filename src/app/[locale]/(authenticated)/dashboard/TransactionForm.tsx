@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import useAddTransactionHandler from "@/hooks/useAddTransactionHandler";
+import useAddTransactionHandler from "@/app/[locale]/(authenticated)/dashboard/hooks/useAddTransactionHandler";
 import { AddTransactionErrors } from "@/schema/addTransactionSchema";
 import { Label } from "@radix-ui/react-label";
 import { useTranslations } from "next-intl";

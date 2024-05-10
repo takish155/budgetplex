@@ -14,7 +14,7 @@ const UserSalarySettingsModal = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="mx-4">
+      <div className="mx-4 md:hidden">
         <Spinner />
       </div>
     ),

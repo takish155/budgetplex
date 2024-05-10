@@ -1,9 +1,15 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import React from "react";
 
-const MobileTableSkeleton = ({ count }: { count: number }) => {
+const MobileTableSkeleton = ({
+  count,
+  className,
+}: {
+  count: number;
+  className?: string;
+}) => {
   return (
-    <div>
+    <div className={className}>
       {[...Array(count)].map((_, index) => (
         <Skeleton
           key={index}

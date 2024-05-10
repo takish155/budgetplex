@@ -3,12 +3,14 @@ import { getLocale } from "next-intl/server";
 import { redirect } from "next/navigation";
 import React, { ReactNode } from "react";
 import AuthenticatedMenu from "./AuthenticatedMenu";
-import BottomTabNav from "@/global_component/header/member/BottomTabNav";
+import { caller } from "@/server";
 
 const layout = async ({ children }: { children: ReactNode }) => {
   const session = await getServerSession();
   const locale = await getLocale();
+  const isVerified = await caller.verification.isVerified();
   if (!session) redirect(`/${locale}/auth/signin`);
+  if (!isVerified.isVerified) redirect(`/${locale}/verify`);
 
   return (
     <main className="flex justify-center">
@@ -16,7 +18,6 @@ const layout = async ({ children }: { children: ReactNode }) => {
         <AuthenticatedMenu />
       </div>
       <section className="w-[100%]">{children}</section>
-      <BottomTabNav />
     </main>
   );
 };

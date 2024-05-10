@@ -41,23 +41,33 @@ model Session {
 }
 
 model User {
-  id                 String              @id @default(cuid()) @map("_id")
-  name               String?
-  username           String?             @unique
-  email              String?             @unique
-  emailVerified      DateTime?
-  hashedPassword     String?
-  image              String?
-  accounts           Account[]
-  sessions           Session[]
-  income             Income[]
-  expenses           Expenses[]
-  bills              Bills[]
-  salary             Salary?
-  Shift              Shift[]
-  userSalarySettings UserSalarySettings?
-  finanicalGoals     FinanicalGoals[]
-  isSetupSalary      Boolean             @default(false)
+  id                   String              @id @default(cuid()) @map("_id")
+  name                 String?
+  username             String?             @unique
+  email                String?             @unique
+  emailVerified        Boolean             @default(false)
+  emailSendingInterval DateTime?
+  hashedPassword       String?
+  image                String?
+  accounts             Account[]
+  sessions             Session[]
+  income               Income[]
+  expenses             Expenses[]
+  bills                Bills[]
+  salary               Salary?
+  Shift                Shift[]
+  userSalarySettings   UserSalarySettings?
+  finanicalGoals       FinanicalGoals[]
+  isSetupSalary        Boolean             @default(false)
+  forgotPassword       ForgotPassword[]
+}
+
+model ForgotPassword {
+  id      String   @id @default(cuid()) @map("_id")
+  token   String   @unique
+  expires DateTime
+  User    User     @relation(fields: [userId], references: [id])
+  userId  String
 }
 
 model VerificationToken {
@@ -65,6 +75,7 @@ model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
+  isResend   Boolean  @default(false)
 
   @@unique([identifier, token])
 }

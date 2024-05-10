@@ -7,7 +7,6 @@ import {
 import { ResponseStatus } from "@/types/responseStatus";
 import prisma from "../../../../../lib/prisma";
 import { getServerSession } from "next-auth";
-import { revalidatePath } from "next/cache";
 import { getLocale, getTranslations } from "next-intl/server";
 
 export interface UpdateTransactionType extends AddTransactionType {
@@ -124,7 +123,6 @@ const updateTransactionAction = async (
       throw new Error("Transaction not found");
     }
 
-    revalidatePath(`/${locale}/dashboard`);
     return { message: t("updateSuccessful"), status: "SUCCESS" };
   } catch (error) {
     if (error instanceof Error) {

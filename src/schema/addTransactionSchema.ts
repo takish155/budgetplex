@@ -1,6 +1,6 @@
 import z from "zod";
 
-const categoryEnum = [
+export const categoryEnum = [
   "investment",
   "utilities",
   "groceries",
@@ -10,6 +10,7 @@ const categoryEnum = [
   "education",
   "health",
   "other",
+  "all",
 ] as const;
 
 export type TransactionCategory = (typeof categoryEnum)[number];

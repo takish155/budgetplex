@@ -1,7 +1,7 @@
 import { TransactionCategory } from "@/schema/addTransactionSchema";
 
 export type TransactionData = {
-  date: Date;
+  date: string;
   title: string;
   category: TransactionCategory;
   amount: number;

@@ -1,4 +1,4 @@
-import { Table, TableBody } from "@/components/ui/table";
+import { Table } from "@/components/ui/table";
 import React from "react";
 import TransactionTableHeader from "../transaction_table/desktop/TransactionTableHeader";
 import dynamic from "next/dynamic";

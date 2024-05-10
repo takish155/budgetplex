@@ -1,22 +1,28 @@
 "use client";
 
-import { TableBody } from "@/components/ui/table";
 import React from "react";
 import TransactionTableRow from "./TransactionTableRow";
-import { TransactionData } from "../../types/transactionData.type";
-import { useTransactionData } from "@/states/transactionDataState";
-import { trpc } from "@/context/QueryProvider";
+import { useTransactionContext } from "@/context/TransactionProvider";
 import TableBodySkeleton from "./TableBodySkeleton";
 
 const TransactionTableBody = () => {
-  const { transactionData } = useTransactionData();
+  const { balanceDataHistory, balanceIsLoadingHistory, balanceIsErrorHistory } =
+    useTransactionContext() || {};
+
+  if (balanceIsLoadingHistory) {
+    return <TableBodySkeleton cellCount={4} skeletonCount={5} />;
+  }
+
+  if (balanceIsErrorHistory) {
+    return <div>Something went wrong</div>;
+  }
 
   return (
     <>
-      {transactionData?.map((transactions) => {
+      {balanceDataHistory?.data?.map((transactions) => {
         return (
           <TransactionTableRow
-            transactions={transactions as TransactionData}
+            transactions={transactions as any}
             key={transactions.id}
           />
         );
