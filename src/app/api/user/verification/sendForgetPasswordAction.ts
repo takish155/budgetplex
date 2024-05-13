@@ -53,10 +53,12 @@ const sendForgetPasswordAction = async (
       to: user.email!,
       from: "Budgetplex <portfolio@takish155.dev>",
       subject: "Reset your password",
-      text: `Click here to reset you password: ${process.env.NEXTAUTH_URL?.replace(
-        /en/,
-        locale
-      )}/forget-password/${verificationToken}`,
+      text: t("resetEmailPasswordDescription", {
+        link: `${process.env.NEXTAUTH_URL?.replace(
+          /en/,
+          locale
+        )}/reset-password/${verificationToken}`,
+      }),
     });
 
     return { message: t("resetPasswordSuccess"), status: "SUCCESS" };

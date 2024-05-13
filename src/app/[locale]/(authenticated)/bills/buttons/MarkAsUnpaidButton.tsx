@@ -13,7 +13,7 @@ const MarkAsUnpaidButton = ({ billId }: { billId: string }) => {
     <>
       {!isUnmarkAsPaidPending ? (
         <Button
-          variant={"outline"}
+          variant={"secondary"}
           type="button"
           onClick={() => unmarkAsPaid({ billId })}
         >

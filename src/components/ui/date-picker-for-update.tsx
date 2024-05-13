@@ -62,7 +62,7 @@ export function DatePickerForUpdate({
           mode="single"
           selected={date}
           onSelect={setDate}
-          initialFocus
+          initialFocus={false}
           disabled={{
             from: new Date(
               currentDate.getFullYear(),

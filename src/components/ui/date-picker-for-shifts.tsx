@@ -67,7 +67,7 @@ export function ShiftDatePicker({
           mode="single"
           selected={date}
           onSelect={setDate}
-          initialFocus
+          initialFocus={false}
           disabled={[
             { from: new Date(0, 0, 0), to: cycleStart },
             { from: cycleEnd, to: new Date(9999, 0, 0) },

@@ -332,7 +332,7 @@
     "emailNotFoundError": "Email not found, please try another one",
     "resetPassword": "Reset Password",
     "password": "Password",
-
+    "resetEmailPasswordDescription": "Click here {link} to reset your password",
     "confirmPassword": "Confirm Password",
     "resetPasswordDescription": "Enter your new password, please keep it safe",
     "resetPasswordSuccess": "Reset changed successfully!",

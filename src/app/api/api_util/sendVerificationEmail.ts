@@ -27,10 +27,12 @@ const sendVerificationEmail = async (userId: string, userEmail: string) => {
     to: userEmail,
     from: "Budgetplex <portfolio@takish155.dev>",
     subject: t("emailVerification"),
-    text: `Click here to verify your email: ${process.env.NEXTAUTH_URL?.replace(
-      /en/,
-      locale
-    )}/verify/${verificationToken}`,
+    text: t("emailBody", {
+      link: `${process.env.NEXTAUTH_URL?.replace(
+        /en/,
+        locale
+      )}/verify/${verificationToken}`,
+    }),
   });
 };
 
