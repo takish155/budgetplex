@@ -4,10 +4,11 @@ import { Button } from "@/components/ui/button";
 import React from "react";
 import { useTransactionContext } from "@/context/TransactionProvider";
 import { dateToString } from "@/lib/dateToString";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const FilterDate = () => {
   const { handleChangeParams, date } = useTransactionContext() || {};
+  const t = useTranslations("Dashboard");
   if (!handleChangeParams) return null;
 
   return (
@@ -19,7 +20,7 @@ const FilterDate = () => {
             handleChangeParams("date", parseInt(date ?? "0") - 1 + "");
           }}
         >
-          Last Month
+          {t("lastMonth")}
         </Button>
         <Button
           variant={"secondary"}
@@ -27,7 +28,7 @@ const FilterDate = () => {
             handleChangeParams("date", parseInt(date ?? "0") + 1 + "");
           }}
         >
-          Next Month
+          {t("nextMonth")}
         </Button>
       </div>
     </>

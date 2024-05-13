@@ -6,6 +6,7 @@ import {
 } from "@/app/[locale]/(authenticated)/settings/settingsType";
 import { getUserId } from "../../api_util/getUserId";
 import { getTranslations } from "next-intl/server";
+import prisma from "../../../../../lib/prisma";
 
 const updateCurrencySignAction = async (data: UpdateCurrencySignSchema) => {
   try {

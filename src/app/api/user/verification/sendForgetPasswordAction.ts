@@ -52,12 +52,12 @@ const sendForgetPasswordAction = async (
     await resend.emails.send({
       to: user.email!,
       from: "Budgetplex <portfolio@takish155.dev>",
-      subject: "Reset your password",
+      subject: t("resetPassword"),
       text: t("resetEmailPasswordDescription", {
         link: `${process.env.NEXTAUTH_URL?.replace(
           /en/,
           locale
-        )}/reset-password/${verificationToken}`,
+        )}/forget-password/${verificationToken}`,
       }),
     });
 

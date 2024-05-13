@@ -78,7 +78,9 @@
     "transactionAmount": "Amount",
     "transactionNote": "Note",
     "transactionDate": "Date",
-    "transactionInfo": "Transaction Information"
+    "transactionInfo": "Transaction Information",
+    "lastMonth": "Last Month",
+    "nextMonth": "Next Month"
   },
   "AddTransaction": {
     "title": "Add Transaction",
