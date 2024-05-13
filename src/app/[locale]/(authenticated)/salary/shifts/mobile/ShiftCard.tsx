@@ -1,8 +1,12 @@
+"use client";
+
 import { Card } from "@/components/ui/card";
 import React, { memo } from "react";
 import { useTranslations } from "next-intl";
 import { ShiftTableRowProps } from "../../types/shift.type";
 import UpdateShiftModal from "../../modal/UpdateShiftModal";
+import { useCurrencySign } from "@/context/CurrrencySignProvider";
+import { formatToMoney } from "@/lib/formatToMoney";
 
 const ShiftCard = ({
   data,
@@ -12,6 +16,7 @@ const ShiftCard = ({
   isSalary: boolean;
 }) => {
   const t = useTranslations("Salary");
+  const currencySign = useCurrencySign();
   const totalEarning =
     data.overtime * data.overtimeRate + data.hourWorked * data.hourlyRate;
   const totalEarningWithTax =
@@ -28,7 +33,7 @@ const ShiftCard = ({
             <p>
               {t("expectedEarningHead")}...{" "}
               <span className="font-semibold">
-                ${new Intl.NumberFormat().format(totalEarningWithTax)}
+                {formatToMoney(totalEarning, currencySign)}
               </span>
             </p>
           </div>

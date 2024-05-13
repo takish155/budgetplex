@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import UpdateUsernameForm from "../forms/UpdateUsernameForm";
 import UpdateEmailForm from "../forms/UpdateEmailForm";
 import UpdatePasswordForm from "../forms/UpdatePasswordForm";
+import UpdateCurrencySignForm from "../forms/UpdateCurrencySignForm";
 
 const UpdateSection = () => {
   const t = useTranslations("SettingsPage");
@@ -26,6 +27,12 @@ const UpdateSection = () => {
         updateDescription={t("passwordHelper")}
       >
         <UpdatePasswordForm />
+      </UpdateSomething>
+      <UpdateSomething
+        updateName={t("currencySign")}
+        updateDescription={t("currencySignHelper")}
+      >
+        <UpdateCurrencySignForm />
       </UpdateSomething>
     </section>
   );

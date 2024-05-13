@@ -2,7 +2,7 @@
 
 import { ResponseStatus } from "@/types/responseStatus";
 import prisma from "../../../../../lib/prisma";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
 import { getMinutes } from "@/lib/getMinutes";
@@ -48,11 +48,15 @@ const sendForgetPasswordAction = async (
       },
     });
 
+    const locale = await getLocale();
     await resend.emails.send({
       to: user.email!,
       from: "Budgetplex <portfolio@takish155.dev>",
       subject: "Reset your password",
-      text: `Click here to reset you password: ${process.env.NEXTAUTH_URL}/forget-password/${verificationToken}`,
+      text: `Click here to reset you password: ${process.env.NEXTAUTH_URL?.replace(
+        /en/,
+        locale
+      )}/forget-password/${verificationToken}`,
     });
 
     return { message: t("resetPasswordSuccess"), status: "SUCCESS" };

@@ -1,3 +1,5 @@
+"use client";
+
 import { TableRow, TableCell, TableBody } from "@/components/ui/table";
 import { BillData } from "@/states/billDataState";
 import React, { memo } from "react";
@@ -6,6 +8,8 @@ import MarkAsPaidButton from "../buttons/MarkAsPaidButton";
 import UpdateBillModal from "../modals/UpdateBillModal";
 import DelateModal from "../modals/DeleteModal";
 import { useTranslations } from "next-intl";
+import { useCurrencySign } from "@/context/CurrrencySignProvider";
+import { formatToMoney } from "@/lib/formatToMoney";
 
 const BillTableRow = ({
   data,
@@ -15,6 +19,7 @@ const BillTableRow = ({
   currentDate: Date;
 }) => {
   const t = useTranslations("BillInfo");
+  const currencySign = useCurrencySign();
 
   return (
     <TableRow
@@ -23,7 +28,7 @@ const BillTableRow = ({
       }
     >
       <TableCell>{data.billName}</TableCell>
-      <TableCell>${new Intl.NumberFormat().format(data.billAmount)}</TableCell>
+      <TableCell>{formatToMoney(data.billAmount, currencySign)}</TableCell>
       <TableCell>{data.dueDate.toLocaleDateString()}</TableCell>
       <TableCell>{data.isPaid ? t("paid") : t("unpaid")}</TableCell>
       <TableCell className="text-white flex justify-center">

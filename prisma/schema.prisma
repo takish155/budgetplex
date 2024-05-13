@@ -49,6 +49,7 @@ model User {
   emailSendingInterval DateTime?
   hashedPassword       String?
   image                String?
+  currencySign         String              @default("$")
   accounts             Account[]
   sessions             Session[]
   income               Income[]

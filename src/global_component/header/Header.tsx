@@ -3,6 +3,7 @@ import React from "react";
 import GuestNav from "./guest/GuestNav";
 import { getServerSession } from "next-auth";
 import MemberNav from "./member/MemberNav";
+import MobileSelectLanguage from "./MobileSelectLanguage";
 
 const Header = async () => {
   const session = await getServerSession();

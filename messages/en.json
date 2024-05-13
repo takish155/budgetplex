@@ -5,7 +5,16 @@
     "register": "Register",
     "try": "Try it now",
     "signOut": "Sign Out",
-    "settings": "Settings"
+    "settings": "Settings",
+    "changeTheme": "Change Theme",
+    "toggleDarkMode": "Toggle to dark mode",
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode",
+    "toggleLightMode": "Toggle to light mode",
+    "toggleLanguage": "Toggle to {language} language",
+    "english": "English",
+    "japanese": "Japanese",
+    "language": "Language"
   },
   "Home": {
     "title": "The Simpliest Way to <span>Manage Your Budget</span>",
@@ -289,6 +298,10 @@
     "maxPasswordError": "Password must be at most 30 characters",
     "passwordsDontMatchError": "Passwords don't match",
     "passwordUpdateSuccess": "Password updated successfully!",
+    "currencySign": "Currency Sign",
+    "currencySignHelper": "Your currency sign is used to display your currency in the app",
+    "invalidCurrencySignError": "Invalid currency sign, you can create your own custom currency sign by 1-5 characters",
+    "currencySignUpdateSuccess": "Currency sign updated successfully!",
     "save": "Save"
   },
   "VerificationPage": {
@@ -303,7 +316,9 @@
     "tokenInvalidOrExpired": "Token is either invalid or expired",
     "resnedVerification": "Resend Verification Email",
     "resendEmailInterval": "Resend already sent, please wait around {minutes} to resend again",
-    "reloadPage": "Refresh"
+    "reloadPage": "Refresh",
+    "emailVerification": "Email Verification",
+    "emailBody": "Click here: {link} to verify your email..."
   },
   "ResetPassword": {
     "forgotPassword": "Forget Password",
@@ -317,6 +332,7 @@
     "emailNotFoundError": "Email not found, please try another one",
     "resetPassword": "Reset Password",
     "password": "Password",
+
     "confirmPassword": "Confirm Password",
     "resetPasswordDescription": "Enter your new password, please keep it safe",
     "resetPasswordSuccess": "Reset changed successfully!",

@@ -1,6 +1,5 @@
 "use client";
 
-import useAuthenticatedMenuHandler from "@/hooks/useAuthenticatedMenuHandler";
 import {
   DollarSign,
   GanttChartSquareIcon,
@@ -19,7 +18,6 @@ const AuthenticatedMenu = () => {
   const t = useTranslations("AuthenticatedMenu");
   const locale = useLocale();
   const pathname = usePathname();
-  const { handleCloseMenu } = useAuthenticatedMenuHandler();
 
   return (
     <header>
@@ -28,11 +26,7 @@ const AuthenticatedMenu = () => {
           {t("tools")}
         </h2>
         <menu className="mb-8">
-          <Link
-            passHref
-            href={`/${locale}/dashboard`}
-            onClick={() => handleCloseMenu()}
-          >
+          <Link passHref href={`/${locale}/dashboard`}>
             <li
               className={`text-paragraph flex items-center p-3 gap-2 hover:font-medium ${
                 pathname.includes(`/${locale}/dashboard`)
@@ -43,11 +37,7 @@ const AuthenticatedMenu = () => {
               <HandCoinsIcon /> {t("transactions")}
             </li>
           </Link>
-          <Link
-            href={`/${locale}/bills`}
-            onClick={() => handleCloseMenu()}
-            passHref
-          >
+          <Link href={`/${locale}/bills`} passHref>
             <li
               className={`text-paragraph flex items-center p-3 gap-2 hover:font-medium ${
                 pathname === `/${locale}/bills`
@@ -58,11 +48,7 @@ const AuthenticatedMenu = () => {
               <GanttChartSquareIcon /> {t("bills")}
             </li>
           </Link>
-          <Link
-            href={`/${locale}/salary/0`}
-            onClick={() => handleCloseMenu()}
-            passHref
-          >
+          <Link href={`/${locale}/salary/0`} passHref>
             <li
               className={`text-paragraph flex items-center p-3 gap-2 hover:font-medium ${
                 pathname.includes(`/${locale}/salary`)
@@ -74,11 +60,7 @@ const AuthenticatedMenu = () => {
               {t("salaryManager")}
             </li>
           </Link>
-          <Link
-            href={`/${locale}/financial-goals/`}
-            onClick={() => handleCloseMenu()}
-            passHref
-          >
+          <Link href={`/${locale}/financial-goals/`} passHref>
             <li
               className={`text-paragraph flex items-center p-3 gap-2 hover:font-medium ${
                 pathname === `/${locale}/financial-goals`
@@ -95,11 +77,7 @@ const AuthenticatedMenu = () => {
           {t("accountHeader")}
         </h2>
         <menu className="mb-8">
-          <Link
-            href={`/${locale}/settings`}
-            onClick={() => handleCloseMenu()}
-            passHref
-          >
+          <Link href={`/${locale}/settings`} passHref>
             <li
               className={`text-paragraph flex items-center p-3 gap-2 hover:font-medium ${
                 pathname === `/${locale}/settings`

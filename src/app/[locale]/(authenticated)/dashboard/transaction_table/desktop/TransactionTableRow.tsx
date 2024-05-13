@@ -1,3 +1,5 @@
+"use client";
+
 import {
   HoverCard,
   HoverCardContent,
@@ -8,6 +10,8 @@ import { useTranslations } from "next-intl";
 import React, { memo } from "react";
 import { TransactionData } from "../../types/transactionData.type";
 import TransactionAction from "../TransactionAction";
+import { useCurrencySign } from "@/context/CurrrencySignProvider";
+import { formatToMoney } from "@/lib/formatToMoney";
 
 interface TransactionTableRowProps {
   transactions: TransactionData;
@@ -15,6 +19,7 @@ interface TransactionTableRowProps {
 
 const TransactionTableRow = ({ transactions }: TransactionTableRowProps) => {
   const c = useTranslations("AddTransaction");
+  const currencySign = useCurrencySign();
 
   return (
     <HoverCard key={transactions.date.toString()}>
@@ -27,7 +32,7 @@ const TransactionTableRow = ({ transactions }: TransactionTableRowProps) => {
               transactions.type === "income" ? "text-green-500" : "text-red-500"
             }
           >
-            ${new Intl.NumberFormat().format(transactions.amount)}
+            {formatToMoney(transactions.amount, currencySign)}
           </TableCell>
           <TableCell>
             <TransactionAction data={transactions} />

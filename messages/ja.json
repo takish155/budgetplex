@@ -1,22 +1,22 @@
 {
   "Header": {
-    "home": "ホーム",
-    "login": "ログイン",
-    "register": "会員登録",
-    "try": "試してみる",
-    "signOut": "サインアウト",
-    "settings": "設定"
+    "home": "Home",
+    "login": "Login",
+    "register": "Register",
+    "try": "Try it now",
+    "signOut": "Sign Out",
+    "settings": "Settings"
   },
   "Home": {
-    "title": "シンプルな <span>予算の設計方</span>",
-    "subtitle": "予算をコントロールし、貯金しよう。",
-    "subtitle2": "<title>Budgetplex</title>と共に、簡単に<i>節約や貯金を追跡し</i>、 予算をうまく使用しよう",
-    "getStarted": "試してみる",
-    "signin": "アカウントをログインする",
-    "whats": "Budgetplexとは?",
-    "ans": "予算管理をするアプリ",
-    "whats1": "単純な予算管理",
-    "ans1": "簡単にトランザクションを記録し, 支出を分類してノートも入れることができます。",
+    "title": "The Simpliest Way to <span>Manage Your Budget</span>",
+    "subtitle": "Take control of your spending and saving with our budget app",
+    "subtitle2": "With <title>Budgetplex</title>, you can easily <i>track your spending and saving</i>, and make a budget that works for you.",
+    "getStarted": "Get Started",
+    "signin": "Sign-in to your account",
+    "whats": "What's Budgetplex?",
+    "ans": "The last app you'll ever need to manage your budget.",
+    "whats1": "Simple Budget Tracking",
+    "ans1": "Record transaction with ease, categorize your spending, add notes if needed.",
     "whats2": "Simple Salary Calculation",
     "ans2": "Automatically calculate your expected salary with only a few inputs.",
     "whats3": "Simple Bill Tracker",
@@ -35,7 +35,9 @@
     "invailidUsernameError": "Invalid username",
     "invailidPasswordError": "Invalid password",
     "signInError": "Invalid username or password",
-    "signInSuccess": "Sign in successfully!"
+    "signInSuccess": "Sign in successfully!",
+    "forgotPassword": "Forgot password?",
+    "signUp": "Don't have an account? Sign up now!"
   },
   "SignupPage": {
     "title": "Sign Up",
@@ -53,7 +55,8 @@
     "passwordsDontMatchError": "Passwords don't match",
     "confirmPassword": "Confirm Password",
     "signup": "Create Your Account",
-    "signUpSuccess": "Sign up successfully!"
+    "signUpSuccess": "Sign up successfully!",
+    "alreadyHaveAccount": "Already have an account? Sign in now!"
   },
   "Dashboard": {
     "transaction": "Transaction",
@@ -105,7 +108,9 @@
     "deleteTransaction": "Delete Transaction",
     "cancel": "Cancel",
     "updateSuccessful": "Transaction updated successfully!",
-    "deleteSuccessful": "Transaction deleted successfully!"
+    "deleteSuccessful": "Transaction deleted successfully!",
+    "filter": "Filter: ",
+    "all": "All"
   },
   "AuthenticatedMenu": {
     "tools": "Tools",
@@ -117,9 +122,9 @@
     "salary": "Salary Manager",
     "financialGoals": "Financial Goals",
     "addFinancialGoal": "Add Financial Goal",
-    "salaryManager": "Salary Manager",
-    "billManager": "Bill Manager",
-    "goalManager": "Goal Manager",
+    "salaryManager": "Salary",
+    "billManager": "Bills",
+    "goalManager": "Goals",
     "accountHeader": "Account",
     "setting": "Settings",
     "signOut": "Sign Out"
@@ -285,5 +290,44 @@
     "passwordsDontMatchError": "Passwords don't match",
     "passwordUpdateSuccess": "Password updated successfully!",
     "save": "Save"
+  },
+  "VerificationPage": {
+    "title": "Verify your email",
+    "description": "We've sent a verification email to your {email}, please verify your email to continue",
+    "resend": "Resend verification email",
+    "errorTitle": "Error verifying email",
+    "verificationSuccess": "Email verified successfully!",
+    "verificationError": "Error verifying email, please try again later",
+    "resendSuccess": "Verification email sent successfully!",
+    "resendError": "Error sending verification email, please try again later",
+    "tokenInvalidOrExpired": "Token is either invalid or expired",
+    "resnedVerification": "Resend Verification Email",
+    "resendEmailInterval": "Resend already sent, please wait around {minutes} to resend again",
+    "reloadPage": "Refresh"
+  },
+  "ResetPassword": {
+    "forgotPassword": "Forget Password",
+    "ForgotPasswordDescription": "Enter your email to reset your password",
+    "email": "Email",
+    "send": "Send",
+    "submit": "Submit",
+    "invalidEmailError": "Invalid email address",
+    "tokenInvalidError": "Reset Password Error",
+    "tokenInvalidOrExpired": "Token is either invalid or expired",
+    "emailNotFoundError": "Email not found, please try another one",
+    "resetPassword": "Reset Password",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "resetPasswordDescription": "Enter your new password, please keep it safe",
+    "resetPasswordSuccess": "Reset changed successfully!",
+    "resetPasswordInterval": "Reset password email already sent, please wait around {minutes} to resend again"
+  },
+  "Errors": {
+    "404title": "404 Page not found",
+    "errorTitle": "Error",
+    "errorDescription": "An error occurred, please try again later",
+    "errorMessage": "Error message: ",
+    "404description": "The page you're looking for doesn't exist. Please check the URL and try again",
+    "returnHome": "Return Home"
   }
 }

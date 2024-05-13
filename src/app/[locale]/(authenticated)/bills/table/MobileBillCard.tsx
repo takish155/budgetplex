@@ -1,12 +1,17 @@
+"use client";
+
 import { Card } from "@/components/ui/card";
 import { BillData } from "@/states/billDataState";
 import React, { memo } from "react";
 import UpdateBillModal from "../modals/UpdateBillModal";
 import DelateModal from "../modals/DeleteModal";
 import { useTranslations } from "next-intl";
+import { useCurrencySign } from "@/context/CurrrencySignProvider";
+import { formatToMoney } from "@/lib/formatToMoney";
 
 const MobileBillCard = ({ bills }: { bills: BillData }) => {
   const t = useTranslations("BillInfo");
+  const currencySign = useCurrencySign();
 
   return (
     <Card className="min-w-[280px] mb-8">
@@ -15,7 +20,7 @@ const MobileBillCard = ({ bills }: { bills: BillData }) => {
           <div className="flex justify-between">
             <h3 className="mb-2">{bills.billName}</h3>
             <p className="mb-2">
-              ${new Intl.NumberFormat().format(bills.billAmount)}
+              {formatToMoney(bills.billAmount, currencySign)}
             </p>
           </div>
           <div className="flex justify-between items-center">

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { memo } from "react";
 import { FinancialGoals } from "./types/financialGoal.type";
 import { Card } from "@/components/ui/card";
@@ -11,9 +13,11 @@ import AddProgressModal from "./modal/AddProgressModal";
 import RemoveFinancialGoalModal from "./modal/RemoveFinancialGoalModal";
 import UpdateFinancialGoalSheet from "./modal/UpdateFinancialGoalSheet";
 import PlanMonthlyForm from "./form/PlanMonthlyForm";
+import { useCurrencySign } from "@/context/CurrrencySignProvider";
 
 const FinancialGoalCard = ({ data }: { data: FinancialGoals }) => {
   const t = useTranslations("FinancialGoals");
+  const currencySign = useCurrencySign();
 
   return (
     <Card className="min-w-[280px] max-w-[500px] mb-8 w-[40%]">
@@ -44,8 +48,8 @@ const FinancialGoalCard = ({ data }: { data: FinancialGoals }) => {
         <section className="flex justify-between items-center flex-wrap gap-4 mb-4">
           <AddProgressModal id={data.id} goalName={data.goalName} />
           <p className="text-right font-semibold">
-            {formatToMoney(data.goalProgress, "$")} /{" "}
-            {formatToMoney(data.goalAmount, "$")}
+            {formatToMoney(data.goalProgress, currencySign)} /{" "}
+            {formatToMoney(data.goalAmount, currencySign)}
           </p>
         </section>
       </section>

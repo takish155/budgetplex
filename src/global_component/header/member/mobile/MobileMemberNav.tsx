@@ -6,6 +6,8 @@ import useSessionMenu from "@/states/sessionMenuState";
 import { Menu } from "lucide-react";
 import React from "react";
 import RenderMobileMemberLinks from "./RenderMobileMemberLinks";
+import MobileSelectLanguage from "../../MobileSelectLanguage";
+import MobileSelectTheme from "../../MobileSelectTheme";
 
 const MobileMemberNav = () => {
   return (
@@ -15,6 +17,8 @@ const MobileMemberNav = () => {
       </SheetTrigger>
       <SheetContent side={"right"}>
         <RenderMobileMemberLinks />
+        <MobileSelectLanguage />
+        <MobileSelectTheme />
       </SheetContent>
     </Sheet>
   );

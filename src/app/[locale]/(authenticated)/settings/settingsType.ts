@@ -28,6 +28,14 @@ export const updatePasswordSchema = z
     path: ["confirmPassword"],
   });
 
+export const updateCurrencySignSchema = z.object({
+  currencySign: z
+    .string()
+    .min(1, { message: "invalidCurrencySignError" })
+    .max(3, { message: "invalidCurrencySignError" }),
+});
+
+export type UpdateCurrencySignSchema = z.infer<typeof updateCurrencySignSchema>;
 export type UpdateUsernameSchema = z.infer<typeof updateUsernameSchema>;
 export type UpdateEmailSchema = z.infer<typeof updateEmailSchema>;
 export type UpdatePasswordSchema = z.infer<typeof updatePasswordSchema>;
@@ -39,4 +47,5 @@ export type UpdateErrors =
   | "invalidPasswordError"
   | "minPasswordError"
   | "maxPasswordError"
+  | "invalidCurrencySignError"
   | "passwordsDontMatchError";

@@ -1,6 +1,6 @@
 "use client";
 import { Languages } from "lucide-react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
@@ -8,6 +8,7 @@ const LanguageButton = () => {
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
+  const t = useTranslations("Header");
 
   return (
     <button
@@ -21,6 +22,11 @@ const LanguageButton = () => {
       }}
     >
       <Languages />
+      <p className="sr-only">
+        {t("toggleLanguage", {
+          language: locale === "en" ? "Japanese" : "英語",
+        })}
+      </p>
     </button>
   );
 };
