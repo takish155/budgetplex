@@ -36,7 +36,7 @@ export const transactionRouter = router({
 
       return user.currencySign;
     } catch (error) {
-      return "$";
+      return "$aw";
     }
   }),
 });
