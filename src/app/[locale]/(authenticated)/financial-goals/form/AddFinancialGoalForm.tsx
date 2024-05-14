@@ -10,11 +10,15 @@ import { DatePicker } from "@/components/ui/date-picker";
 import { AddFinancialGoalErrors } from "../types/addFinancialGoalSchema";
 import { Button } from "@/components/ui/button";
 import { AlertDialogCancel } from "@/components/ui/alert-dialog";
+import { useCurrencySign } from "@/context/CurrrencySignProvider";
+import { formatToMoney } from "@/lib/formatToMoney";
 
 const AddFinancialGoalForm = () => {
+  const currencySign = useCurrencySign();
   const t = useTranslations("FinancialGoals");
-  const { control, errors, handleSubmit, isPending, mutate, register } =
+  const { control, errors, handleSubmit, isPending, mutate, register, watch } =
     useAddFinancialGoalFormHandler();
+  const amountWatched = watch("goalAmount");
 
   return (
     <form onSubmit={handleSubmit((data) => mutate(data))}>
@@ -28,6 +32,11 @@ const AddFinancialGoalForm = () => {
       </FormField>
       <FormField htmlFor="goalAmount" placeholder={t("goalAmount")}>
         <Input {...register("goalAmount", { valueAsNumber: true })} />
+        {amountWatched > 0 && (
+          <p className="text-xl font-medium">
+            {formatToMoney(amountWatched, currencySign)}
+          </p>
+        )}
         {errors.goalAmount && (
           <p className="text-red-500 text-sm">
             {t(errors.goalAmount.message as AddFinancialGoalErrors)}

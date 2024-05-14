@@ -6,13 +6,16 @@ import { DatePicker } from "@/components/ui/date-picker";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { useCurrencySign } from "@/context/CurrrencySignProvider";
 import useAddBill from "@/hooks/useAddBill";
+import { formatToMoney } from "@/lib/formatToMoney";
 import { AddBillErrors } from "@/schema/addBillSchema";
 import { useTranslations } from "next-intl";
 import React from "react";
 import { Controller } from "react-hook-form";
 
 const AddBillForm = () => {
+  const currencySign = useCurrencySign();
   const t = useTranslations("BillInfo");
   const {
     control,
@@ -22,7 +25,10 @@ const AddBillForm = () => {
     isPending,
     mutate,
     register,
+    watch,
   } = useAddBill();
+  const watchedAmount = watch("billAmount");
+
   return (
     <form onSubmit={handleSubmit((data) => mutate(data))}>
       {formStatus.message && (
@@ -48,6 +54,11 @@ const AddBillForm = () => {
           placeholder={t("billAmount")}
           {...register("billAmount", { valueAsNumber: true })}
         />
+        {watchedAmount && (
+          <p className="text-xl font-bold">
+            {formatToMoney(watchedAmount, currencySign)}
+          </p>
+        )}
         {errors.billAmount && (
           <p className="text-red-500 text-sm">
             {t(errors.billAmount.message as AddBillErrors)}

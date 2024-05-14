@@ -53,6 +53,7 @@ const useUpdateBillHandler = (id: string) => {
     handleSubmit,
     register,
     control,
+    watch,
   } = useForm<AddBillType>({
     resolver: zodResolver(addBillSchema),
   });
@@ -67,6 +68,7 @@ const useUpdateBillHandler = (id: string) => {
     deleteTransaction,
     isUpdateBillPending,
     isDeletePending,
+    watch,
   };
 };
 

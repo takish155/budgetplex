@@ -23,6 +23,7 @@ const useAddTransactionHandler = () => {
     handleSubmit,
     register,
     control,
+    watch,
     reset,
   } = useForm<AddTransactionType>({
     resolver: zodResolver(addTransactionSchema),
@@ -56,6 +57,7 @@ const useAddTransactionHandler = () => {
     register,
     errors,
     control,
+    watch,
   };
 };
 

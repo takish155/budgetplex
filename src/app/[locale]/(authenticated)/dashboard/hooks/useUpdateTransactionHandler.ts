@@ -40,6 +40,7 @@ const useUpdateTransactionHandler = (id: string) => {
     handleSubmit,
     register,
     control,
+    watch,
   } = useForm<AddTransactionType>({
     resolver: zodResolver(addTransactionSchema),
   });
@@ -51,6 +52,7 @@ const useUpdateTransactionHandler = (id: string) => {
   return {
     formStatus,
     handleSubmit,
+    watch,
     register,
     errors,
     control,

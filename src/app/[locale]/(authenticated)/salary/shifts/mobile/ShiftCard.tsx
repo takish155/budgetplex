@@ -33,7 +33,7 @@ const ShiftCard = ({
             <p>
               {t("expectedEarningHead")}...{" "}
               <span className="font-semibold">
-                {formatToMoney(totalEarning, currencySign)}
+                {formatToMoney(totalEarningWithTax, currencySign)}
               </span>
             </p>
           </div>

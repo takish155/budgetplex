@@ -13,6 +13,7 @@ const useUpdateShiftHandler = (id: string) => {
     register,
     reset,
     control,
+    watch,
   } = useForm<AddShiftType>({ resolver: zodResolver(addShiftSchema) });
 
   const { isPending, mutate } = useMutation({
@@ -36,6 +37,7 @@ const useUpdateShiftHandler = (id: string) => {
     isPending,
     register,
     control,
+    watch,
   };
 };
 

@@ -16,13 +16,18 @@ import useAddTransactionHandler from "@/app/[locale]/(authenticated)/dashboard/h
 import { AddTransactionErrors } from "@/schema/addTransactionSchema";
 import { Label } from "@radix-ui/react-label";
 import { useTranslations } from "next-intl";
-import React from "react";
+import React, { useState } from "react";
 import { Controller } from "react-hook-form";
+import { formatToMoney } from "@/lib/formatToMoney";
+import { useCurrencySign } from "@/context/CurrrencySignProvider";
 
 const TransactionForm = () => {
+  const currencySign = useCurrencySign();
   const t = useTranslations("AddTransaction");
-  const { errors, handleSubmit, isPending, mutate, register, control } =
+  const { errors, handleSubmit, isPending, mutate, register, control, watch } =
     useAddTransactionHandler();
+  const [amount, setAmount] = useState(0);
+  const watchedAmount = watch("amount");
 
   const categoryList = [
     { value: "investment", label: t("investment") },
@@ -53,6 +58,11 @@ const TransactionForm = () => {
           placeholder={t("amount")}
           {...register("amount", { valueAsNumber: true })}
         />
+        {watchedAmount > 0 && (
+          <p className="text-bold text-xl">
+            {formatToMoney(watchedAmount, currencySign)}
+          </p>
+        )}
         {errors.amount && (
           <p className="text-red-500 text-sm">{t("invalidAmountError")}</p>
         )}

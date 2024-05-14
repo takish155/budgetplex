@@ -26,6 +26,7 @@ const useAddFinancialGoalFormHandler = () => {
     handleSubmit,
     control,
     reset,
+    watch,
     formState: { errors },
   } = useForm<AddFinancialGoal>({
     resolver: zodResolver(addFinancialGoalSchema),
@@ -38,6 +39,7 @@ const useAddFinancialGoalFormHandler = () => {
     errors,
     isPending,
     mutate,
+    watch,
   };
 };
 

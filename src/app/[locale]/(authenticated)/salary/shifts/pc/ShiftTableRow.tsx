@@ -19,7 +19,7 @@ const ShiftTableRow = ({ data }: { data: ShiftTableRowProps }) => {
       <TableCell>{data.date.toLocaleDateString()}</TableCell>
       <TableCell>{data.hourWorked}</TableCell>
       <TableCell>{data.overtime}</TableCell>
-      <TableCell>{formatToMoney(data.hourlyRate, currencySign)}</TableCell>
+      <TableCell>{formatToMoney(totalEarningWithTax, currencySign)}</TableCell>
       <TableCell>
         <UpdateShiftModal
           data={{

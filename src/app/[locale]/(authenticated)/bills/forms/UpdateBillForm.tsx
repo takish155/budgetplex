@@ -15,6 +15,8 @@ import { Controller } from "react-hook-form";
 import MarkAsUnpaidButton from "../buttons/MarkAsUnpaidButton";
 import MarkAsPaidButton from "../buttons/MarkAsPaidButton";
 import Spinner from "@/components/Spinner";
+import { useCurrencySign } from "@/context/CurrrencySignProvider";
+import { formatToMoney } from "@/lib/formatToMoney";
 
 const UpdateBillForm = ({
   data,
@@ -25,6 +27,7 @@ const UpdateBillForm = ({
   id: string;
   isPaid: boolean;
 }) => {
+  const currencySign = useCurrencySign();
   const t = useTranslations("BillInfo");
   const {
     control,
@@ -34,7 +37,10 @@ const UpdateBillForm = ({
     register,
     isUpdateBillPending,
     updateBill,
+    watch,
   } = useUpdateBillHandler(id);
+  const watchedAmount = watch("billAmount");
+
   return (
     <form onSubmit={handleSubmit((data) => updateBill(data))}>
       {formStatus.message && (
@@ -65,6 +71,11 @@ const UpdateBillForm = ({
           {...register("billAmount", { valueAsNumber: true })}
           defaultValue={data.billAmount}
         />
+        {watchedAmount > 0 && (
+          <p className="text-xl">
+            {formatToMoney(watchedAmount, currencySign)}
+          </p>
+        )}
         {errors.billAmount && (
           <p className="text-red-500 text-sm">
             {t(errors.billAmount.message as AddBillErrors)}

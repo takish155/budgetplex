@@ -4,7 +4,6 @@ import FormField from "@/components/FormField";
 import { Input } from "@/components/ui/input";
 import { useTranslations } from "next-intl";
 import React from "react";
-import useAddFinancialGoalFormHandler from "../hooks/useAddFinancialGoalFormHandler";
 import { Controller } from "react-hook-form";
 import { DatePicker } from "@/components/ui/date-picker";
 import { AddFinancialGoalErrors } from "../types/addFinancialGoalSchema";
@@ -13,13 +12,17 @@ import { FinancialGoals } from "../types/financialGoal.type";
 import useUpdateFinancialGoalHandler from "../hooks/useUpdateFinancialGoalHandler";
 import Spinner from "@/components/Spinner";
 import { Textarea } from "@/components/ui/textarea";
-import PlanMonthlyForm from "./PlanMonthlyForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useCurrencySign } from "@/context/CurrrencySignProvider";
+import { formatToMoney } from "@/lib/formatToMoney";
 
 const UpdateFinancialGoalForm = ({ data }: { data: FinancialGoals }) => {
+  const currencySign = useCurrencySign();
   const t = useTranslations("FinancialGoals");
-  const { control, errors, handleSubmit, isPending, mutate, register } =
+  const { control, errors, handleSubmit, isPending, mutate, register, watch } =
     useUpdateFinancialGoalHandler();
+  const goalAmount = watch("goalAmount");
+  const goalProgress = watch("progressAmount");
 
   return (
     <Card>
@@ -45,6 +48,11 @@ const UpdateFinancialGoalForm = ({ data }: { data: FinancialGoals }) => {
               defaultValue={data.goalAmount}
               {...register("goalAmount", { valueAsNumber: true })}
             />
+            {goalAmount > 0 && (
+              <p className="text-xl font-medium">
+                {formatToMoney(goalAmount, currencySign)}
+              </p>
+            )}
             {errors.goalAmount && (
               <p className="text-red-500 text-sm">
                 {t(errors.goalAmount.message as AddFinancialGoalErrors)}
@@ -56,6 +64,11 @@ const UpdateFinancialGoalForm = ({ data }: { data: FinancialGoals }) => {
               defaultValue={data.goalProgress}
               {...register("progressAmount", { valueAsNumber: true })}
             />
+            {goalProgress > 0 && (
+              <p className="text-xl font-medium">
+                {formatToMoney(goalProgress, currencySign)}
+              </p>
+            )}
             {errors.goalAmount && (
               <p className="text-red-500 text-sm">
                 {t(errors.progressAmount?.message as AddFinancialGoalErrors)}

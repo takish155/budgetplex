@@ -9,11 +9,16 @@ import React from "react";
 import { useSetupSalaryManagerHandler } from "../hooks/useSetupSalaryManagerHandler";
 import { Controller } from "react-hook-form";
 import Spinner from "@/components/Spinner";
+import { useCurrencySign } from "@/context/CurrrencySignProvider";
+import { formatToMoney } from "@/lib/formatToMoney";
 
 const SetupSalaryManagerForm = () => {
+  const currencySign = useCurrencySign();
   const t = useTranslations("Salary");
-  const { errors, handleSubmit, isPending, mutate, register, control } =
+  const { errors, handleSubmit, isPending, mutate, register, watch } =
     useSetupSalaryManagerHandler();
+  const hourlyRate = watch("hourlyRate");
+  const overtimeRate = watch("overtimeRate");
 
   return (
     <form onSubmit={handleSubmit((data) => mutate(data))}>
@@ -23,6 +28,9 @@ const SetupSalaryManagerForm = () => {
           placeholder={t("hourlyRate")}
           {...register("hourlyRate", { valueAsNumber: true })}
         />
+        {hourlyRate > 0 && (
+          <p className="text-xl">{formatToMoney(hourlyRate, currencySign)}</p>
+        )}
         {errors.hourlyRate && (
           <p className="text-red-500 text-sm">{t("invalidHourlyRateError")}</p>
         )}
@@ -33,6 +41,9 @@ const SetupSalaryManagerForm = () => {
           placeholder={t("overtimeRate")}
           {...register("overtimeRate", { valueAsNumber: true })}
         />
+        {overtimeRate > 0 && (
+          <p className="text-xl">{formatToMoney(overtimeRate, currencySign)}</p>
+        )}
         {errors.overtimeRate && (
           <p className="text-red-500 text-sm">
             {t("invalidOverTimeRateError")}

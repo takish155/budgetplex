@@ -23,6 +23,7 @@ const useAddBill = () => {
     handleSubmit,
     register,
     control,
+    watch,
     formState: { errors },
   } = useForm<AddBillType>({
     resolver: zodResolver(addBillSchema),
@@ -36,6 +37,7 @@ const useAddBill = () => {
     register,
     errors,
     control,
+    watch,
   };
 };
 

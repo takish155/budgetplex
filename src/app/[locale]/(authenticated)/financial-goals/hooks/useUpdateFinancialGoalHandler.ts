@@ -31,11 +31,21 @@ const useUpdateFinancialGoalHandler = () => {
     register,
     control,
     formState: { errors },
+    watch,
   } = useForm<UpdateFinancialGoal>({
     resolver: zodResolver(updateFinancialGoalSchema),
   });
 
-  return { isPending, mutate, reset, handleSubmit, register, errors, control };
+  return {
+    isPending,
+    mutate,
+    reset,
+    handleSubmit,
+    register,
+    errors,
+    control,
+    watch,
+  };
 };
 
 export default useUpdateFinancialGoalHandler;

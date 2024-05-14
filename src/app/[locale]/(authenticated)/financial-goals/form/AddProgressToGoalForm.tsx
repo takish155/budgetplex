@@ -9,12 +9,14 @@ import { Button } from "@/components/ui/button";
 import Spinner from "@/components/Spinner";
 import { AlertDialogCancel } from "@/components/ui/alert-dialog";
 import { useDialogStates } from "@/states/dialogStates";
+import { useCurrencySign } from "@/context/CurrrencySignProvider";
+import { formatToMoney } from "@/lib/formatToMoney";
 
 const AddProgressToGoalForm = ({ id }: { id: string }) => {
   const { isPending, mutate, progressValue, setProgressValue } =
     useAddProgressToGoalHandler();
   const { toggleAddProgressModal } = useDialogStates();
-
+  const currencySign = useCurrencySign();
   const t = useTranslations("FinancialGoals");
 
   return (
@@ -30,6 +32,11 @@ const AddProgressToGoalForm = ({ id }: { id: string }) => {
           type="number"
           onChange={(e) => setProgressValue(parseFloat(e.target.value))}
         />
+        {progressValue > 0 && (
+          <p className="text-xl font-medium">
+            {formatToMoney(progressValue, currencySign)}
+          </p>
+        )}
       </FormField>
       <div className="flex gap-4">
         <AlertDialogCancel asChild className="bg-primary">

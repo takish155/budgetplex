@@ -27,9 +27,10 @@ export const useSetupSalaryManagerHandler = () => {
     register,
     handleSubmit,
     control,
+    watch,
     formState: { errors },
   } = useForm<SetupSalaryManager>({
     resolver: zodResolver(setupSalaryManagerSchema),
   });
-  return { register, handleSubmit, errors, isPending, mutate, control };
+  return { register, handleSubmit, errors, isPending, mutate, control, watch };
 };

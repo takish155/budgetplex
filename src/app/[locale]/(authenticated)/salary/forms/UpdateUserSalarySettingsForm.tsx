@@ -9,15 +9,20 @@ import React from "react";
 import { useUpdateUserSalarySettingsHandler } from "../hooks/useUpdateUserSalarySettingsHandler";
 import { UserSalarySettingsModalProps } from "../types/shift.type";
 import Spinner from "@/components/Spinner";
+import { useCurrencySign } from "@/context/CurrrencySignProvider";
+import { formatToMoney } from "@/lib/formatToMoney";
 
 const UpdateUserSalarySettingsForm = ({
   data,
 }: {
   data: UserSalarySettingsModalProps;
 }) => {
+  const currencySign = useCurrencySign();
   const t = useTranslations("Salary");
-  const { errors, handleSubmit, isPending, mutate, register } =
+  const { errors, handleSubmit, isPending, mutate, register, watch } =
     useUpdateUserSalarySettingsHandler();
+  const hourlyRate = watch("hourlyRate");
+  const overtimeRate = watch("overtimeRate");
 
   return (
     <form onSubmit={handleSubmit((data) => mutate(data))}>
@@ -28,6 +33,9 @@ const UpdateUserSalarySettingsForm = ({
           {...register("hourlyRate", { valueAsNumber: true })}
           defaultValue={data.hourlyRate}
         />
+        {hourlyRate > 0 && (
+          <p className="text-xl">{formatToMoney(hourlyRate, currencySign)}</p>
+        )}
         {errors.hourlyRate && (
           <p className="text-red-500 text-sm">{t("invalidHourlyRateError")}</p>
         )}
@@ -39,6 +47,9 @@ const UpdateUserSalarySettingsForm = ({
           {...register("overtimeRate", { valueAsNumber: true })}
           defaultValue={data.overtimeRate}
         />
+        {overtimeRate > 0 && (
+          <p className="text-xl">{formatToMoney(overtimeRate, currencySign)}</p>
+        )}
         {errors.overtimeRate && (
           <p className="text-red-500 text-sm">
             {t("invalidOverTimeRateError")}
@@ -68,19 +79,6 @@ const UpdateUserSalarySettingsForm = ({
             {t("invalidMonthStartDateError")}
           </p>
         )}
-        {/* <Controller
-          name="monthStartDate"
-          control={control}
-          render={({ field: { onChange } }) => (
-            <DatePickerForUpdate onChange={onChange} />
-          )}
-          defaultValue={data.monthStartDate}
-        />
-        {errors.monthStartDate && (
-          <p className="text-red-500 text-sm">
-            {t("invalidMonthStartDateError")}
-          </p>
-        )} */}
       </FormField>
       <FormField placeholder={t("payday")} htmlFor="payday">
         <Input

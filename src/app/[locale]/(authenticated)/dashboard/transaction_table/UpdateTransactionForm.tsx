@@ -24,6 +24,8 @@ import FormField from "@/components/FormField";
 import { AddTransactionErrors } from "@/schema/addTransactionSchema";
 import Spinner from "@/components/Spinner";
 import { SheetClose } from "@/components/ui/sheet";
+import { formatToMoney } from "@/lib/formatToMoney";
+import { useCurrencySign } from "@/context/CurrrencySignProvider";
 
 const UpdateTransactionForm = ({
   title,
@@ -34,6 +36,8 @@ const UpdateTransactionForm = ({
   id,
 }: TransactionData) => {
   const t = useTranslations("AddTransaction");
+  const currencySign = useCurrencySign();
+
   const {
     errors,
     handleSubmit,
@@ -41,10 +45,12 @@ const UpdateTransactionForm = ({
     control,
     updateTransaction,
     isUpdatePending,
+    watch,
   } = useUpdateTransactionHandler(id);
 
   const { deleteTransaction, isDeletePending } =
     useDeleteTransactionHandler(id);
+  const watchedAmount = watch("amount");
 
   const categoryList = [
     { value: "investment", label: t("investment") },
@@ -78,6 +84,11 @@ const UpdateTransactionForm = ({
           {...register("amount", { valueAsNumber: true })}
           defaultValue={amount}
         />
+        {watchedAmount > 0 && (
+          <p className="text-bold text-xl">
+            {formatToMoney(watchedAmount, currencySign)}
+          </p>
+        )}
         {errors.amount && (
           <p className="text-red-500 text-sm">{t("invalidAmountError")}</p>
         )}
