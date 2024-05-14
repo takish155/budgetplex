@@ -5,8 +5,9 @@ import {
   updateCurrencySignSchema,
 } from "@/app/[locale]/(authenticated)/settings/settingsType";
 import { getUserId } from "../../api_util/getUserId";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import prisma from "../../../../../lib/prisma";
+import { revalidatePath } from "next/cache";
 
 const updateCurrencySignAction = async (data: UpdateCurrencySignSchema) => {
   try {
@@ -22,6 +23,7 @@ const updateCurrencySignAction = async (data: UpdateCurrencySignSchema) => {
     });
 
     const t = await getTranslations("SettingsPage");
+    revalidatePath("/", "layout");
     return { status: "SUCCESS", message: t("currencySignUpdateSuccess") };
   } catch (error) {
     if (error instanceof Error) {
