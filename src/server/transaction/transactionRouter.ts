@@ -9,6 +9,7 @@ import { getTransactionHistoryRouter } from "./getTransactionHistory";
 import { getTransactionInfoRouter } from "./getTransactionInfo";
 import { getBillsThisMonthRouter } from "./getUnpaidBillsThisMonth";
 import { getUserSalarySettingsRouter } from "./getUserSalarySettings";
+import prisma from "../../../lib/prisma";
 
 export const transactionRouter = router({
   getBalance: getBalanceRouter.getBalance,
@@ -36,7 +37,7 @@ export const transactionRouter = router({
 
       return user.currencySign;
     } catch (error) {
-      return "$aw";
+      return "$";
     }
   }),
 });
