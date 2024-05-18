@@ -22,6 +22,12 @@ const sendVerificationEmail = async (userId: string, userEmail: string) => {
   });
 
   const t = await getTranslations("VerificationPage");
+  console.log(
+    `${process.env.NEXTAUTH_URL?.replace(
+      /en/,
+      locale
+    )}/verify/${verificationToken}`
+  );
 
   await resend.emails.send({
     to: userEmail,

@@ -1,10 +1,7 @@
 "use client";
 
-import verifyVerifactionTokenAction from "@/app/api/user/verification/verifyVerifactionTokenAction";
 import MessageCard from "@/components/MessageCard";
-import { getServerSession } from "next-auth";
 import { useLocale, useTranslations } from "next-intl";
-import { getLocale, getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import React, { useEffect } from "react";
 import useVerifyTokenIdHandler from "./hooks/useVerifyTokenIdHandler";
@@ -31,6 +28,8 @@ const Page = ({ params }: { params: { tokenId: string } }) => {
   }
 
   if (data.status === "SUCCESS") redirect(`/${locale}/dashboard`);
+
+  return <Spinner />;
 };
 
 export default Page;
