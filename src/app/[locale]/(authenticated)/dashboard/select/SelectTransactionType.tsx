@@ -17,11 +17,7 @@ const SelectTransactionType = () => {
   if (!handleChangeParams) return null;
 
   return (
-    <FormField
-      htmlFor="transactionType"
-      placeholder={t("transactionType")}
-      className="justify-end"
-    >
+    <FormField htmlFor="transactionType" placeholder={t("transactionType")}>
       <Select
         value={transactionType ?? "all"}
         onValueChange={(e) => {

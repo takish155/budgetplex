@@ -15,7 +15,7 @@ const DisplayAmount = ({ amount, type, isLoading }: DisplayAmountProps) => {
   const currencySign = useCurrencySign();
 
   return (
-    <div>
+    <div className="min-w-[250px]">
       <h3 className="text-paragraph font-light">{type}</h3>
       <h3 className="text-miniheader font-bold">
         {isLoading ? (

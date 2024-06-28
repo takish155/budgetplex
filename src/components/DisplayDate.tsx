@@ -11,7 +11,7 @@ const DisplayDate = ({ date, heading }: DisplayDateProps) => {
   const locale = useLocale();
 
   return (
-    <div>
+    <div className="min-w-[250px]">
       <h3 className="text-paragraph font-light">{heading}</h3>
       <h3 className="text-miniheader font-bold">
         {dateToString(date, locale)}

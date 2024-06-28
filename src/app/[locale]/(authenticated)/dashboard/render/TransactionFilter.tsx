@@ -11,11 +11,8 @@ const TransactionFilter = () => {
 
   return (
     <section className="my-8">
-      <h3 className="text-paragraph mb-4 font-medium">{t("filter")}</h3>
-      <div className="flex justify-between flex-wrap gap-4">
-        <SelectCategory />
-        <SelectTransactionType />
-      </div>
+      <SelectCategory />
+      <SelectTransactionType />
     </section>
   );
 };

@@ -9,6 +9,7 @@ import TransactionFilterSkeleton from "./render/TransactionFilterSkeleton";
 import CurrentDate from "./render/CurrentDate";
 import ChangeDateSkeleton from "./render/ChangeDateSkeleton";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
+import FilterSection from "./FilterSection";
 
 const TransactionFilter = dynamic(() => import("./render/TransactionFilter"), {
   ssr: false,
@@ -29,10 +30,11 @@ const page = () => {
           <h2 className="text-miniheader font-semibold">
             {t("transaction")} (<CurrentDate />)
           </h2>
-          <AddTransactionButton />
+          <div className="flex gap-4">
+            <FilterSection />
+            <AddTransactionButton />
+          </div>
         </section>
-        <FilterDate />
-        <TransactionFilter />
         <Balance />
         <TransactionHistorySection />
       </TransactionContextProvider>

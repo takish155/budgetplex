@@ -13,7 +13,7 @@ const FilterDate = () => {
 
   return (
     <>
-      <div className="w-[100%] flex justify-between mt-4">
+      <div className="w-[100%] flex justify-between mt-4 mb-10">
         <Button
           variant={"secondary"}
           onClick={() => {

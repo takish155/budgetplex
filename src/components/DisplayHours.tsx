@@ -9,7 +9,7 @@ interface DisplayHourProps {
 const DisplayHour = ({ hour, name }: DisplayHourProps) => {
   const t = useTranslations("Salary");
   return (
-    <div>
+    <div className="min-w-[250px]">
       <h3 className="text-paragraph font-light">{name}</h3>
       <h3 className="text-miniheader font-bold">
         {hour} <span className="text-paragraph">{t("hour")}</span>

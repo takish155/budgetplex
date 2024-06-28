@@ -4,12 +4,17 @@ import { SheetClose } from "@/components/ui/sheet";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { ReactNode } from "react";
+import SignOutButton from "../SignOutButton";
+import { LogOut } from "lucide-react";
+import { signOut } from "next-auth/react";
+import { useTranslations } from "next-intl";
 
 const MobileMemberLinks = ({
   title,
   links,
 }: {
   title: string;
+  signOut?: boolean;
   links: {
     name: string;
     href: string;
@@ -17,6 +22,7 @@ const MobileMemberLinks = ({
   }[];
 }) => {
   const pathname = usePathname();
+  const t = useTranslations("AuthenticatedMenu");
 
   return (
     <>
@@ -39,6 +45,13 @@ const MobileMemberLinks = ({
             </Link>
           );
         })}
+        <li
+          className={`text-paragraph flex items-center p-3 gap-2 hover:font-medium cursor-pointer `}
+          onClick={() => signOut()}
+        >
+          <LogOut />
+          {t("signOut")}
+        </li>
       </menu>
     </>
   );

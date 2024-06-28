@@ -80,7 +80,8 @@
     "transactionDate": "Date",
     "transactionInfo": "Transaction Information",
     "lastMonth": "Last Month",
-    "nextMonth": "Next Month"
+    "nextMonth": "Next Month",
+    "filterTransactions": "Filter Transactions"
   },
   "AddTransaction": {
     "title": "Add Transaction",
