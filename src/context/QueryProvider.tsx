@@ -23,7 +23,7 @@ export default function QueryProvider({ children }: { children: ReactNode }) {
   );
   const [trpcClient] = useState(() =>
     trpc.createClient({
-      links: [httpBatchLink({ url: "http://localhost:3000/api/trpc" })],
+      links: [httpBatchLink({ url: "/api/trpc" })],
     })
   );
 
