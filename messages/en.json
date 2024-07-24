@@ -67,7 +67,7 @@
     "signUpSuccess": "Sign up successfully!",
     "alreadyHaveAccount": "Already have an account? Sign in now!"
   },
-  "Dashboard": {
+  "Transaction": {
     "transaction": "Transaction",
     "income": "Total Income",
     "expense": "Total Expense",
@@ -126,7 +126,7 @@
   },
   "AuthenticatedMenu": {
     "tools": "Tools",
-    "dashboard": "Dashboard",
+    "Transaction": "Transaction",
     "transactions": "Transactions",
     "addTransaction": "Add Transaction",
     "bills": "Bills",
@@ -138,6 +138,7 @@
     "billManager": "Bills",
     "goalManager": "Goals",
     "accountHeader": "Account",
+    "dashboard": "Dashboard",
     "setting": "Settings",
     "signOut": "Sign Out"
   },
@@ -348,5 +349,41 @@
     "errorMessage": "Error message: ",
     "404description": "The page you're looking for doesn't exist. Please check the URL and try again",
     "returnHome": "Return Home"
+  },
+  "Dashboard": {
+    "title": "Dashboard",
+    "expense": "Expense",
+    "income": "Income",
+    "transactionThisYear": "Transaction this year",
+    "transactionThisYearDescription": "Transactions you've made this year, see how much you've spent and earned",
+    "billsToPayThisMonth": "Bills to pay this month",
+    "billsToPayThisMonthDescription": "Bills you have to pay this month, see how much you have to pay and how much you've paid",
+    "totalIncome": "Total Income",
+    "totalExpense": "Total Expense",
+    "monthlyExpense": "Monthly Expenses",
+    "remainingToPay": "Remaining to pay up",
+    "highestIncome": "Highest Income",
+    "highestExpense": "Highest Expense",
+    "highestBill": "Highest Bill",
+    "overdueBills": "Overdue Bill Total",
+    "financialGoals": "Financial Goals",
+    "financialGoalsDescription": "Your financial goals, see how much you've saved and how much you have to save to achieve your goals",
+    "mostExpensiveGoal": "Most Expensive Goal",
+    "highestProgressGoal": "Highest Progress Goal",
+    "goalAmount": "Goal Percentage",
+    "goalProgress": "Remeaining Percentage",
+    "showMore": "Show More",
+    "0": "Jan",
+    "1": "Feb",
+    "2": "Mar",
+    "3": "Apr",
+    "4": "May",
+    "5": "Jun",
+    "6": "Jul",
+    "7": "Aug",
+    "8": "Sep",
+    "9": "Oct",
+    "10": "Nov",
+    "11": "Dec"
   }
 }

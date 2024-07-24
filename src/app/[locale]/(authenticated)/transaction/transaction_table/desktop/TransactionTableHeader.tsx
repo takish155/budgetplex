@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import React from "react";
 
 const TransactionTableHeader = () => {
-  const t = useTranslations("Dashboard");
+  const t = useTranslations("Transaction");
 
   return (
     <TableHeader className="text-paragraph">

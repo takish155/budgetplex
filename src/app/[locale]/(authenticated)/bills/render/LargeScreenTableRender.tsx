@@ -9,7 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import dynamic from "next/dynamic";
-import TableBodySkeleton from "../../dashboard/transaction_table/desktop/TableBodySkeleton";
+import TableBodySkeleton from "../../transaction/transaction_table/desktop/TableBodySkeleton";
 
 const BillTableRow = dynamic(() => import("../table/BillTableRow"), {
   ssr: false,

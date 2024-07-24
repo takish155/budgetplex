@@ -2,7 +2,7 @@
 
 import useTransaction, {
   UseTransaction,
-} from "@/app/[locale]/(authenticated)/dashboard/hooks/useTransaction";
+} from "@/app/[locale]/(authenticated)/transaction/hooks/useTransaction";
 import { ReactNode, createContext, useContext } from "react";
 
 const TransactionContext = createContext<UseTransaction | undefined>(undefined);

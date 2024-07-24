@@ -67,7 +67,7 @@
     "signUpSuccess": "登録に成功しました！",
     "alreadyHaveAccount": "既にアカウントをお持ちですか？ 今すぐサインイン！"
   },
-  "Dashboard": {
+  "Transaction": {
     "transaction": "取引",
     "income": "総収入",
     "expense": "総支出",
@@ -125,7 +125,7 @@
   },
   "AuthenticatedMenu": {
     "tools": "ツール",
-    "dashboard": "ダッシュボード",
+    "Transaction": "ダッシュボード",
     "transactions": "取引",
     "addTransaction": "取引を追加",
     "bills": "請求書",

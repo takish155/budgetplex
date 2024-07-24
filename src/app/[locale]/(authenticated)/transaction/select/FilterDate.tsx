@@ -8,7 +8,7 @@ import { useLocale, useTranslations } from "next-intl";
 
 const FilterDate = () => {
   const { handleChangeParams, date } = useTransactionContext() || {};
-  const t = useTranslations("Dashboard");
+  const t = useTranslations("Transaction");
   if (!handleChangeParams) return null;
 
   return (

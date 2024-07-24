@@ -1,6 +1,5 @@
 "use client";
 
-import Spinner from "@/components/Spinner";
 import { Button } from "@/components/ui/button";
 import { Combobox } from "@/components/ui/combobox";
 import { Input } from "@/components/ui/input";
@@ -12,21 +11,42 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import useAddTransactionHandler from "@/app/[locale]/(authenticated)/dashboard/hooks/useAddTransactionHandler";
-import { AddTransactionErrors } from "@/schema/addTransactionSchema";
-import { Label } from "@radix-ui/react-label";
 import { useTranslations } from "next-intl";
-import React, { useState } from "react";
-import { Controller } from "react-hook-form";
+import React from "react";
+import { Controller, Form } from "react-hook-form";
+import { TransactionData } from "../types/transactionData.type";
+import useDeleteTransactionHandler from "../hooks/useDeleteTransactionHandler";
+import FormField from "@/components/FormField";
+import { AddTransactionErrors } from "@/schema/addTransactionSchema";
+import Spinner from "@/components/Spinner";
+import { SheetClose } from "@/components/ui/sheet";
 import { formatToMoney } from "@/lib/formatToMoney";
 import { useCurrencySign } from "@/context/CurrrencySignProvider";
+import useUpdateTransactionHandler from "../hooks/useUpdateTransactionHandler";
 
-const TransactionForm = () => {
-  const currencySign = useCurrencySign();
+const UpdateTransactionForm = ({
+  title,
+  amount,
+  description: note,
+  type: transactionType,
+  category,
+  id,
+}: TransactionData) => {
   const t = useTranslations("AddTransaction");
-  const { errors, handleSubmit, isPending, mutate, register, control, watch } =
-    useAddTransactionHandler();
-  const [amount, setAmount] = useState(0);
+  const currencySign = useCurrencySign();
+
+  const {
+    errors,
+    handleSubmit,
+    register,
+    control,
+    updateTransaction,
+    isUpdatePending,
+    watch,
+  } = useUpdateTransactionHandler(id);
+
+  const { deleteTransaction, isDeletePending } =
+    useDeleteTransactionHandler(id);
   const watchedAmount = watch("amount");
 
   const categoryList = [
@@ -42,21 +62,24 @@ const TransactionForm = () => {
   ];
 
   return (
-    <form onSubmit={handleSubmit((data) => mutate(data))}>
-      <div className="grid w-full max-w-sm items-center gap-1.5 mb-4">
-        <Label htmlFor="transactionTitle">{t("transactionTitle")}</Label>
-        <Input placeholder={t("transactionTitle")} {...register("title")} />
+    <form onSubmit={handleSubmit((data) => updateTransaction(data))}>
+      <FormField htmlFor="transactionTitle" placeholder={t("transactionTitle")}>
+        <Input
+          placeholder={t("transactionTitle")}
+          {...register("title")}
+          defaultValue={title}
+        />
         {errors.title && (
           <p className="text-red-500 text-sm">
-            {t(errors.title.message as AddTransactionErrors)}
+            {t(errors.title?.message! as AddTransactionErrors)}
           </p>
         )}
-      </div>
-      <div className="grid w-full max-w-sm items-center gap-1.5 mb-4">
-        <Label htmlFor="amount">{t("amount")}</Label>
+      </FormField>
+      <FormField htmlFor="amount" placeholder={t("amount")}>
         <Input
           placeholder={t("amount")}
           {...register("amount", { valueAsNumber: true })}
+          defaultValue={amount}
         />
         {watchedAmount > 0 && (
           <p className="text-bold text-xl">
@@ -66,28 +89,31 @@ const TransactionForm = () => {
         {errors.amount && (
           <p className="text-red-500 text-sm">{t("invalidAmountError")}</p>
         )}
-      </div>
-      <div className="grid w-full max-w-sm items-center gap-1.5 mb-10">
-        <Label htmlFor="note">{t("note")}</Label>
-        <Textarea placeholder={t("note")} {...register("note")} />
+      </FormField>
+      <FormField htmlFor="note" placeholder={t("note")}>
+        <Textarea
+          placeholder={t("note")}
+          {...register("note")}
+          defaultValue={note ?? ""}
+        />
         {errors.note && (
           <p className="text-red-500 text-sm">
             {t(errors.note.message as AddTransactionErrors)}
           </p>
         )}
-      </div>
-      <div className="grid w-full max-w-sm items-center gap-1.5 mb-4">
-        <Label htmlFor="transactionType">{t("transactionType")}</Label>
+      </FormField>
+      <FormField htmlFor="transactionType" placeholder={t("transactionType")}>
         <Controller
+          defaultValue={transactionType as "expense" | "income"}
           name="transactionType"
-          control={control} // control prop from useForm()
+          control={control}
           render={({ field: { onChange, value } }) => (
             <Select
               value={value}
               onValueChange={(selectedValue) => {
-                // Manually update the form state
                 onChange(selectedValue);
               }}
+              defaultValue={transactionType}
             >
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder={t("transactionType")} />
@@ -102,35 +128,48 @@ const TransactionForm = () => {
         {errors.transactionType && (
           <p className="text-red-500 text-sm">{t("transactionError")}</p>
         )}
-      </div>
-      <div className="grid w-full max-w-sm items-center gap-1.5 mb-11">
-        <Label htmlFor="category">{t("category")}</Label>
-
+      </FormField>
+      <FormField htmlFor="category" placeholder={t("category")}>
         <Controller
           name="category"
           control={control} // control prop from useForm()
-          render={({ field: { onChange, value } }) => (
+          defaultValue={category}
+          render={({ field: { onChange } }) => (
             <Combobox
               data={categoryList}
               label={t("selectCategory")}
               category={t("searchCategory")}
               notFound={t("noFoundCategory")}
               onChange={onChange}
-              value={value}
+              value={category}
             />
           )}
         />
         {errors.category && (
           <p className="text-red-500 text-sm">{t("categoryError")}</p>
         )}
-      </div>
-      {isPending ? (
+      </FormField>
+      {isDeletePending || isUpdatePending ? (
         <Spinner />
       ) : (
-        <Button type="submit">{t("addTransaction")}</Button>
+        <div className="flex gap-8 flex-wrap">
+          <Button type="submit">{t("updateTransaction")}</Button>
+          <Button
+            variant={"destructive"}
+            type="button"
+            onClick={() => deleteTransaction()}
+          >
+            {t("deleteTransaction")}
+          </Button>
+          <SheetClose asChild>
+            <Button variant={"outline"} type="button">
+              {t("cancel")}
+            </Button>
+          </SheetClose>
+        </div>
       )}
     </form>
   );
 };
 
-export default TransactionForm;
+export default UpdateTransactionForm;

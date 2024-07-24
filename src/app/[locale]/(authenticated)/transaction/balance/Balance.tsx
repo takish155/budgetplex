@@ -7,7 +7,7 @@ import { useTransactionContext } from "@/context/TransactionProvider";
 
 const Balance = () => {
   const { balanceData: data, balanceIsLoading } = useTransactionContext() || {};
-  const t = useTranslations("Dashboard");
+  const t = useTranslations("Transaction");
 
   return (
     <section className="flex justify-between mb-11 flex-wrap gap-8">
