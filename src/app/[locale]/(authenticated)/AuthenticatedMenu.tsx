@@ -5,6 +5,7 @@ import {
   GanttChartSquareIcon,
   GoalIcon,
   HandCoinsIcon,
+  LayoutDashboardIcon,
   LogOut,
   Settings,
 } from "lucide-react";
@@ -30,6 +31,17 @@ const AuthenticatedMenu = () => {
             <li
               className={`text-paragraph flex items-center p-3 gap-2 hover:font-medium ${
                 pathname.includes(`/${locale}/dashboard`)
+                  ? "font-medium"
+                  : "font-extralight hover:font-medium"
+              }`}
+            >
+              <LayoutDashboardIcon /> {t("dashboard")}
+            </li>
+          </Link>
+          <Link passHref href={`/${locale}/transaction`}>
+            <li
+              className={`text-paragraph flex items-center p-3 gap-2 hover:font-medium ${
+                pathname.includes(`/${locale}/transaction`)
                   ? "font-medium"
                   : "font-extralight hover:font-medium"
               }`}

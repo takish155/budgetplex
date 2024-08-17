@@ -3,7 +3,7 @@ import React from "react";
 import ShiftTableHeader from "./ShiftTableHeader";
 import { ShiftTableProps } from "../../types/shift.type";
 import dynamic from "next/dynamic";
-import TableBodySkeleton from "../../../dashboard/transaction_table/desktop/TableBodySkeleton";
+import TableBodySkeleton from "../../../transaction/transaction_table/desktop/TableBodySkeleton";
 
 const ShiftTableBody = dynamic(() => import("./ShiftTableBody"), {
   ssr: false,

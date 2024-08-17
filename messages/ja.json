@@ -67,7 +67,7 @@
     "signUpSuccess": "登録に成功しました！",
     "alreadyHaveAccount": "既にアカウントをお持ちですか？ 今すぐサインイン！"
   },
-  "Dashboard": {
+  "Transaction": {
     "transaction": "取引",
     "income": "総収入",
     "expense": "総支出",
@@ -125,7 +125,7 @@
   },
   "AuthenticatedMenu": {
     "tools": "ツール",
-    "dashboard": "ダッシュボード",
+    "Transaction": "ダッシュボード",
     "transactions": "取引",
     "addTransaction": "取引を追加",
     "bills": "請求書",
@@ -138,7 +138,8 @@
     "goalManager": "目標",
     "accountHeader": "アカウント",
     "setting": "設定",
-    "signOut": "サインアウト"
+    "signOut": "サインアウト",
+    "dashboard": "ダッシュボード"
   },
   "BillInfo": {
     "title": "請求書マネージャー",
@@ -349,5 +350,41 @@
     "errorMessage": "エラーメッセージ: ",
     "404description": "探しているページは存在しません。URLを確認し、再度お試しください。",
     "returnHome": "ホームに戻る"
+  },
+  "Dashboard": {
+    "title": "ダッシュボード",
+    "expense": "支出",
+    "income": "収入",
+    "transactionThisYear": "今年の取引",
+    "transactionThisYearDescription": "今年行った取引を表示し、支出と収入を確認できます",
+    "billsToPayThisMonth": "今月の支払うべき請求書",
+    "billsToPayThisMonthDescription": "今月支払うべき請求書を表示し、支払うべき金額と支払った金額を確認できます",
+    "totalIncome": "総収入",
+    "totalExpense": "総支出",
+    "monthlyExpense": "毎月の支出",
+    "remainingToPay": "残りの支払額",
+    "highestIncome": "最高収入",
+    "highestExpense": "最高支出",
+    "highestBill": "最高請求書",
+    "overdueBills": "延滞請求書の合計",
+    "financialGoals": "財務目標",
+    "financialGoalsDescription": "財務目標を表示し、貯金額と目標達成のために必要な貯金額を確認できます",
+    "mostExpensiveGoal": "最も高額な目標",
+    "highestProgressGoal": "最も進捗の高い目標",
+    "goalAmount": "目標の割合",
+    "goalProgress": "残りの割合",
+    "showMore": "もっと見る",
+    "0": "1月",
+    "1": "2月",
+    "2": "3月",
+    "3": "4月",
+    "4": "5月",
+    "5": "6月",
+    "6": "7月",
+    "7": "8月",
+    "8": "9月",
+    "9": "10月",
+    "10": "11月",
+    "11": "12月"
   }
 }

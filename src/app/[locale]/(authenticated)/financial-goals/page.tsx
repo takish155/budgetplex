@@ -11,8 +11,11 @@ const FinancialGoalSection = dynamic(() => import("./FinancialGoalSection"), {
 });
 
 const FinancialGoalPage = async () => {
-  const t = await getTranslations("FinancialGoals");
-  const response = await caller.financial_goals.getGoal();
+  // const t = await getTranslations("FinancialGoals");
+  // const response = await caller.financial_goals.getGoal();
+  const translation = getTranslations("FinancialGoals");
+  const call = caller.financial_goals.getGoal();
+  const [t, response] = await Promise.all([translation, call]);
 
   return (
     <article className="w-[95%] mx-auto mt-8">

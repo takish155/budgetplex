@@ -1,45 +1,25 @@
 import React from "react";
-import AddTransactionButton from "./add_transaction/AddTransactionButton";
-import Balance from "./balance/Balance";
-import TransactionHistorySection from "./TransactionHistorySection";
-import { TransactionContextProvider } from "@/context/TransactionProvider";
-import { useTranslations } from "next-intl";
-import dynamic from "next/dynamic";
-import TransactionFilterSkeleton from "./render/TransactionFilterSkeleton";
-import CurrentDate from "./render/CurrentDate";
-import ChangeDateSkeleton from "./render/ChangeDateSkeleton";
-import { ErrorBoundary } from "next/dist/client/components/error-boundary";
-import FilterSection from "./FilterSection";
+import TransactionThisYearSection from "./TransactionThisYearSection";
+import BillsSection from "./BillsSection";
+import { caller } from "@/server";
+import { getTranslations } from "next-intl/server";
+import FinancialGoalSection from "./FInancialGoalSection";
 
-const TransactionFilter = dynamic(() => import("./render/TransactionFilter"), {
-  ssr: false,
-  loading: () => <TransactionFilterSkeleton />,
-});
-const FilterDate = dynamic(() => import("./select/FilterDate"), {
-  ssr: false,
-  loading: () => <ChangeDateSkeleton />,
-});
-
-const page = () => {
-  const t = useTranslations!("Dashboard");
+const DashboardPage = async () => {
+  const translation = getTranslations("Dashboard");
+  const cur = caller.balance.getCurrencySign();
+  const [t, currency] = await Promise.all([translation, cur]);
 
   return (
-    <section className="w-[95%] mx-auto">
-      <TransactionContextProvider>
-        <section className="mt-8 mb-3 flex justify-between">
-          <h2 className="text-miniheader font-semibold">
-            {t("transaction")} (<CurrentDate />)
-          </h2>
-          <div className="flex gap-4">
-            <FilterSection />
-            <AddTransactionButton />
-          </div>
-        </section>
-        <Balance />
-        <TransactionHistorySection />
-      </TransactionContextProvider>
-    </section>
+    <div className="w-[95%] mx-auto min-h-screen">
+      <h2 className="text-miniheader font-semibold my-8">{t("title")}</h2>
+      <section className="flex flex-wrap">
+        <TransactionThisYearSection currency={currency} />
+        <BillsSection currency={currency} />
+        <FinancialGoalSection currency={currency} />
+      </section>
+    </div>
   );
 };
 
-export default page;
+export default DashboardPage;

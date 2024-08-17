@@ -11,7 +11,7 @@ import TransactionFilter from "./render/TransactionFilter";
 import CurrentDate from "./render/CurrentDate";
 
 const FilterSection = () => {
-  const t = useTranslations("Dashboard");
+  const t = useTranslations("Transaction");
 
   return (
     <Popover>

@@ -2,12 +2,10 @@
 
 import FormField from "@/components/FormField";
 import { Button } from "@/components/ui/button";
-import { DatePickerForUpdate } from "@/components/ui/date-picker-for-update";
 import { Input } from "@/components/ui/input";
 import { useTranslations } from "next-intl";
 import React from "react";
 import { useSetupSalaryManagerHandler } from "../hooks/useSetupSalaryManagerHandler";
-import { Controller } from "react-hook-form";
 import Spinner from "@/components/Spinner";
 import { useCurrencySign } from "@/context/CurrrencySignProvider";
 import { formatToMoney } from "@/lib/formatToMoney";

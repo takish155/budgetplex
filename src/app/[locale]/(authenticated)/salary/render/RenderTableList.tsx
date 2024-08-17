@@ -3,7 +3,7 @@
 import React from "react";
 import { ShiftTableProps } from "../types/shift.type";
 import dynamic from "next/dynamic";
-import MobileTableSkeleton from "../../dashboard/transaction_table/MobileTableSkeleton";
+import MobileTableSkeleton from "../../transaction/transaction_table/MobileTableSkeleton";
 import ShiftTable from "../shifts/pc/ShiftTable";
 
 const MobileRenderShift = dynamic(() => import("./MobileRenderShift"), {

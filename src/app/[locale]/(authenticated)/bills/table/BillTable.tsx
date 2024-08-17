@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
-import MobileTableSkeleton from "../../dashboard/transaction_table/MobileTableSkeleton";
+import MobileTableSkeleton from "../../transaction/transaction_table/MobileTableSkeleton";
 import { BillData, useBillData } from "@/states/billDataState";
 import LargeScreenTableRender from "../render/LargeScreenTableRender";
 

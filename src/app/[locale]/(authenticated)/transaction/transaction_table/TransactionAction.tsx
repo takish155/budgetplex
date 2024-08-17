@@ -13,7 +13,7 @@ import { TransactionData } from "../types/transactionData.type";
 import { useTranslations } from "next-intl";
 
 const TransactionAction = ({ data }: { data: TransactionData }) => {
-  const t = useTranslations("Dashboard");
+  const t = useTranslations("Transaction");
   return (
     <Sheet>
       <SheetTrigger asChild>
