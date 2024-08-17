@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Poppins, M_PLUS_1p } from "next/font/google";
 import "./../globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Header from "@/global_component/header/Header";
@@ -16,10 +16,17 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
+const mPlus1p = M_PLUS_1p({
+  subsets: ["cyrillic", "latin"],
+  weight: ["100", "300", "500", "700", "900"],
+  variable: "--font-mplus1p",
+});
+
 export const metadata: Metadata = {
   title: "Budgetplex",
   description:
     "Budgetplex is a budgeting app that helps you manage your finances.",
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
@@ -35,7 +42,7 @@ export default function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className={cn("font-poppins")}>
+      <body className={locale === "en" ? poppins.className : mPlus1p.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

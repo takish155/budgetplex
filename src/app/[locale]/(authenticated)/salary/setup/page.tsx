@@ -5,11 +5,13 @@ import { caller } from "@/server";
 import { redirect } from "next/navigation";
 
 const page = async () => {
-  const t = await getTranslations("Salary");
-  const locale = await getLocale();
-  const data = await caller.balance.getSalaryData({
+  const translation = getTranslations("Salary");
+  const lang = getLocale();
+  const response = caller.balance.getSalaryData({
     index: 0,
   });
+
+  const [t, locale, data] = await Promise.all([translation, lang, response]);
 
   if (data?.status !== "NOT_SETUP_YET") redirect(`/${locale}/salary`);
 

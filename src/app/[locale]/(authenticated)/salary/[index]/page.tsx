@@ -4,7 +4,6 @@ import { redirect } from "next/navigation";
 import React from "react";
 import { SalaryStatistic } from "../statistic/SalaryStatistic";
 import AddShiftFormModal from "../modal/AddShiftFormModal";
-import { getSalaryDates } from "@/lib/getSalaryDates";
 import dynamic from "next/dynamic";
 import RenderTableList from "../render/RenderTableList";
 import Spinner from "@/components/Spinner";
@@ -22,12 +21,13 @@ const UserSalarySettingsModal = dynamic(
 );
 
 const page = async ({ params }: { params: { index?: string } }) => {
-  const t = await getTranslations("Salary");
-  const locale = await getLocale();
-
-  const response = await caller.balance.getSalaryData({
+  const translation = getTranslations("Salary");
+  const lang = getLocale();
+  const data = caller.balance.getSalaryData({
     index: params.index ? parseInt(params.index) : 1,
   });
+
+  const [t, locale, response] = await Promise.all([translation, lang, data]);
 
   if (response?.status === "NOT_SETUP_YET") {
     redirect(`/${locale}/salary/setup`);

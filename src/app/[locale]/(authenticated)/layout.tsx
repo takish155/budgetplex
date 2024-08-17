@@ -7,10 +7,18 @@ import { caller } from "@/server";
 import { CurrencySignProvider } from "@/context/CurrrencySignProvider";
 
 const layout = async ({ children }: { children: ReactNode }) => {
-  const session = await getServerSession();
-  const locale = await getLocale();
-  const isVerified = await caller.verification.isVerified();
-  const currencySign = await caller.balance.getCurrencySign();
+  const auth = getServerSession();
+  const lang = getLocale();
+  const verified = caller.verification.isVerified();
+  const currency = caller.balance.getCurrencySign();
+
+  const [session, locale, currencySign, isVerified] = await Promise.all([
+    auth,
+    lang,
+    currency,
+    verified,
+  ]);
+
   if (!session) redirect(`/${locale}/auth/signin`);
   if (!isVerified.isVerified) redirect(`/${locale}/verify`);
 

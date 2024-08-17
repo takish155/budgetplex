@@ -13,11 +13,8 @@ export const config = {
   matcher: [
     "/",
     "/(en|ja)/:path*",
-    "/dashboard/:path*",
-    "/transaction/:path*",
-    "/bills/:path*",
-    "/salary/:path*",
-    "/settings/:path*",
-    "/(en|ja)/salary/:idk*",
+    "/auth/signin",
+    "/auth/signup",
+    "/verify/:path*",
   ],
 };

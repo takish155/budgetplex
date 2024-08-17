@@ -2,13 +2,11 @@
 
 import MessageCard from "@/components/MessageCard";
 import { useLocale, useTranslations } from "next-intl";
-import { redirect } from "next/navigation";
 import React, { useEffect } from "react";
 import useVerifyTokenIdHandler from "./hooks/useVerifyTokenIdHandler";
 import Spinner from "@/components/Spinner";
 
 const Page = ({ params }: { params: { tokenId: string } }) => {
-  const locale = useLocale!();
   const t = useTranslations!("VerificationPage");
 
   const { data, isPending, verifyTokenId } = useVerifyTokenIdHandler();
@@ -27,7 +25,8 @@ const Page = ({ params }: { params: { tokenId: string } }) => {
     );
   }
 
-  if (data.status === "SUCCESS") redirect(`/${locale}/dashboard`);
+  if (data.status === "SUCCESS")
+    <MessageCard cardTitle={t("errorTitle")} cardDescription={data.message} />;
 
   return <Spinner />;
 };

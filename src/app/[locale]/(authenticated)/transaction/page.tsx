@@ -10,15 +10,6 @@ import CurrentDate from "./render/CurrentDate";
 import ChangeDateSkeleton from "./render/ChangeDateSkeleton";
 import FilterSection from "./FilterSection";
 
-const TransactionFilter = dynamic(() => import("./render/TransactionFilter"), {
-  ssr: false,
-  loading: () => <TransactionFilterSkeleton />,
-});
-const FilterDate = dynamic(() => import("./select/FilterDate"), {
-  ssr: false,
-  loading: () => <ChangeDateSkeleton />,
-});
-
 const page = () => {
   const t = useTranslations!("Transaction");
 

@@ -1,0 +1,16 @@
+{
+  "name": "Omniparts",
+  "short_name": "Omniparts",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ],
+  "theme_color": "rgb(3 7 18)",
+  "background_color": "#FFF",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait"
+}
