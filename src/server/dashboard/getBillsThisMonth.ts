@@ -1,6 +1,7 @@
 import { getServerSession } from "next-auth";
 import { publicProcedure, router } from "../trpc";
 import { TRPCError } from "@trpc/server";
+import prisma from "@/../lib/prisma";
 
 export const getBillsThisMonthRouter = router({
   getBillsThisMonth: publicProcedure.query(async () => {

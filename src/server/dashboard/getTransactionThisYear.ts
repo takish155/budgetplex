@@ -1,7 +1,7 @@
 import { publicProcedure, router } from "../trpc";
-import prisma from "../../../lib/prisma";
 import { TRPCError } from "@trpc/server";
 import { getServerSession } from "next-auth";
+import prisma from "@/../lib/prisma";
 
 export type Transactions = {
   data: {

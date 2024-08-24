@@ -1,6 +1,7 @@
 import { publicProcedure, router } from "../trpc";
 import { TRPCError } from "@trpc/server";
 import { getServerSession } from "next-auth";
+import prisma from "@/../lib/prisma";
 
 export const getFinancialGoalRouter = router({
   getFinancialGoals: publicProcedure.query(async () => {
