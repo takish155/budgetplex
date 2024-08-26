@@ -1,4 +1,4 @@
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 import { publicProcedure, router } from "../trpc";
 import { getBalanceRouter } from "./getBalance";
 import { getBillInfoRouter } from "./getBillInfo";
@@ -10,6 +10,7 @@ import { getTransactionInfoRouter } from "./getTransactionInfo";
 import { getBillsThisMonthRouter } from "./getUnpaidBillsThisMonth";
 import { getUserSalarySettingsRouter } from "./getUserSalarySettings";
 import prisma from "../../../lib/prisma";
+import { cookies } from "next/headers";
 
 export const transactionRouter = router({
   getBalance: getBalanceRouter.getBalance,
@@ -23,18 +24,21 @@ export const transactionRouter = router({
   getUserSalarySettings: getUserSalarySettingsRouter.getUserSalarySettings,
   getCurrencySign: publicProcedure.query(async () => {
     try {
-      const session = await getServerSession();
+      const session = await auth();
+      const cookieStore = cookies();
+
       if (!session) {
         throw new Error("Unauthorized");
       }
       const user = await prisma?.user.findUnique({
-        where: { email: session.user?.email! },
+        where: { id: session.user?.id },
         select: { currencySign: true },
       });
       if (!user) {
         throw new Error("User not found");
       }
 
+      cookieStore.set("BUDGETPEX_CURRENCY", user.currencySign);
       return user.currencySign;
     } catch (error) {
       return "$";

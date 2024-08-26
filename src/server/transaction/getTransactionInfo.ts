@@ -1,6 +1,6 @@
 import { publicProcedure, router } from "../trpc";
 import prisma from "../../../lib/prisma";
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 import z from "zod";
 
 export const getTransactionInfoRouter = router({
@@ -8,13 +8,13 @@ export const getTransactionInfoRouter = router({
     .input(z.string().min(1).max(1000))
     .query(async (opts) => {
       try {
-        const session = await getServerSession();
+        const session = await auth();
         if (!session) {
           throw new Error("Unauthorized");
         }
 
         const user = await prisma.user.findUnique({
-          where: { email: session.user?.email! },
+          where: { id: session.user?.id },
         });
 
         if (!user) {

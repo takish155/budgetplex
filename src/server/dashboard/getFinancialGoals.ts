@@ -1,20 +1,24 @@
 import { publicProcedure, router } from "../trpc";
 import { TRPCError } from "@trpc/server";
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 import prisma from "@/../lib/prisma";
 
 export const getFinancialGoalRouter = router({
   getFinancialGoals: publicProcedure.query(async () => {
     try {
-      const session = await getServerSession();
+      const session = await auth();
       if (!session) throw new TRPCError({ code: "UNAUTHORIZED" });
 
       const user = await prisma?.user.findUnique({
-        where: { email: session.user?.email! },
-        select: { finanicalGoals: true },
+        where: { id: session.user?.id },
+        select: { finanicalGoals: true, currencySign: true },
       });
       if (!user) throw new TRPCError({ code: "UNAUTHORIZED" });
       const { finanicalGoals } = user;
+
+      if (finanicalGoals.length === 0) {
+        return null;
+      }
 
       const mostExpensiveFinancialGoal = finanicalGoals.reduce((prev, cur) => {
         return prev.goalAmount > cur.goalAmount ? prev : cur;
@@ -28,6 +32,7 @@ export const getFinancialGoalRouter = router({
       });
 
       return {
+        currency: user.currencySign,
         mostExpensiveFinancialGoal: {
           title: mostExpensiveFinancialGoal.goalName,
           goalAmount: mostExpensiveFinancialGoal.goalAmount,

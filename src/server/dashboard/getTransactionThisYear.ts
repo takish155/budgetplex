@@ -1,6 +1,6 @@
 import { publicProcedure, router } from "../trpc";
 import { TRPCError } from "@trpc/server";
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 import prisma from "@/../lib/prisma";
 
 export type Transactions = {
@@ -18,12 +18,13 @@ export type Transactions = {
 export const getTransactionThisYearRouter = router({
   getTransactionThisYear: publicProcedure.query(async () => {
     try {
-      const session = await getServerSession();
+      const session = await auth();
       if (!session) throw new TRPCError({ code: "UNAUTHORIZED" });
 
       const user = await prisma.user.findUnique({
-        where: { email: session.user?.email! },
+        where: { id: session.user?.id },
       });
+
       if (!user) throw new TRPCError({ code: "UNAUTHORIZED" });
 
       let transactions: Transactions = {
@@ -88,6 +89,7 @@ export const getTransactionThisYearRouter = router({
         expenseThisYear: transactions.data,
         highestIncomeName: transactions.highestIncomeName,
         highestExpenseName: transactions.highestExpenseName,
+        currency: user.currencySign,
       };
     } catch (error) {
       if (error instanceof TRPCError) throw error;

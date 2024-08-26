@@ -1,6 +1,6 @@
 "use server";
 
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 import sendVerificationEmail from "../../api_util/sendVerificationEmail";
 import { getTranslations } from "next-intl/server";
 import prisma from "../../../../../lib/prisma";
@@ -9,11 +9,11 @@ import { ResponseStatus } from "@/types/responseStatus";
 
 const resendVerificationTokenAction = async (): Promise<ResponseStatus> => {
   try {
-    const session = await getServerSession();
+    const session = await auth();
     if (!session) throw new Error("Unauthorized");
 
     const user = await prisma?.user.findUnique({
-      where: { email: session.user?.email! },
+      where: { id: session.user?.id },
     });
     if (!user) throw new Error("User not found");
 

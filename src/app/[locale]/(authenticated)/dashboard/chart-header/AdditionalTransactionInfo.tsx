@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { formatToMoney } from "@/lib/formatToMoney";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import React from "react";
 
@@ -24,7 +24,6 @@ const AdditionalTransactionInfo = ({
   data: AdditionalTransactionInfoProps;
 }) => {
   const t = useTranslations("Dashboard");
-  const locale = useLocale();
 
   return (
     <section className="w-[35%] max-sm:w-full">
@@ -51,7 +50,7 @@ const AdditionalTransactionInfo = ({
         </CardHeader>
       </Card>
       <div className="flex justify-end">
-        <Link href={`/${locale}/dashboard`} passHref>
+        <Link href={`/transaction`} passHref>
           <Button>{t("showMore")}</Button>
         </Link>
       </div>

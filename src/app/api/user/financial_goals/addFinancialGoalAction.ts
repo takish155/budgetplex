@@ -1,14 +1,14 @@
 "use server";
 
 import { AddFinancialGoal } from "@/app/[locale]/(authenticated)/financial-goals/types/addFinancialGoalSchema";
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 import prisma from "../../../../../lib/prisma";
 import { getLocale, getTranslations } from "next-intl/server";
 import { revalidatePath } from "next/cache";
 
 const addFinancialGoalAction = async (data: AddFinancialGoal) => {
   try {
-    const session = await getServerSession();
+    const session = await auth();
     if (!session) throw new Error("Unauthorized");
 
     const user = await prisma.user.findUnique({

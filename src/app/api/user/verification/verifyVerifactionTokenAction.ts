@@ -2,7 +2,7 @@
 
 import { getTranslations } from "next-intl/server";
 import prisma from "../../../../../lib/prisma";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 const verifyVerifactionTokenAction = async (tokenId: string) => {
   if (!tokenId) {

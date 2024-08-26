@@ -1,6 +1,6 @@
 "use server";
 
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 import prisma from "../../../../../lib/prisma";
 import { getTranslations } from "next-intl/server";
 import { ResponseStatus } from "@/types/responseStatus";
@@ -13,12 +13,12 @@ const updateUsernameAction = async (
     const isSafe = updateUsernameSchema.safeParse({ username: username });
     if (!isSafe.success) throw new Error("Invalid username");
 
-    const session = await getServerSession();
+    const session = await auth();
     if (!session) throw new Error("Unauthorized");
 
     const user = await prisma.user.findUnique({
       where: {
-        email: session.user?.email!,
+        id: session.user?.id,
       },
     });
     if (!user) throw new Error("User not found");
@@ -34,7 +34,7 @@ const updateUsernameAction = async (
 
     await prisma.user.update({
       where: {
-        email: session.user?.email!,
+        id: session.user?.id,
         id: user.id,
       },
       data: {

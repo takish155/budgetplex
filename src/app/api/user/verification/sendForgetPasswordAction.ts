@@ -3,7 +3,7 @@
 import { ResponseStatus } from "@/types/responseStatus";
 import prisma from "../../../../../lib/prisma";
 import { getLocale, getTranslations } from "next-intl/server";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import { getMinutes } from "@/lib/getMinutes";
 import { Resend } from "resend";

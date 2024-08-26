@@ -12,7 +12,7 @@ import { getTranslations } from "next-intl/server";
 import { caller } from "@/server";
 import BillThisMonthHeader from "./chart-header/BillThisMonthHeader";
 
-const BillsSection = async ({ currency }: { currency: string }) => {
+const BillsSection = async () => {
   const translation = getTranslations("Dashboard");
   const response = caller.dashboard.getBillThisMonth();
   const [t, data] = await Promise.all([translation, response]);
@@ -25,20 +25,22 @@ const BillsSection = async ({ currency }: { currency: string }) => {
       </CardHeader>
       <CardContent>
         <BillThisMonthHeader
-          currency={currency}
+          currency={data?.currency ?? "$"}
           monthlyExpense={data?.totalBillsToPay ?? 0}
           remainingToPay={data?.totalRemainingBillsToPay ?? 0}
         />
         <div className="flex justify-around flex-wrap">
-          <BillThisMonthChart data={data} currency={currency} />
-          <AditionalBillInfo
-            data={{
-              currency: currency,
-              highestBill: data?.highestBill.billAmount ?? 0,
-              highestBillName: data?.highestBill.billName ?? "",
-              overdueBillTotal: data?.overdueBillTotal ?? 0,
-            }}
-          />
+          <BillThisMonthChart data={data} currency={data?.currency ?? "$"} />
+          {data?.highestBill.billName ? (
+            <AditionalBillInfo
+              data={{
+                currency: data?.currency ?? "$",
+                highestBill: data?.highestBill.billAmount ?? 0,
+                highestBillName: data?.highestBill.billName ?? "",
+                overdueBillTotal: data?.overdueBillTotal ?? 0,
+              }}
+            />
+          ) : null}
         </div>
       </CardContent>
     </Card>

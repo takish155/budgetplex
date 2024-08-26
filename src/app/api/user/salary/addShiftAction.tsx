@@ -2,7 +2,7 @@
 
 import { AddShiftType, addShiftSchema } from "@/schema/addShiftSchema";
 import { addMonths, setDate } from "date-fns";
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 import prisma from "../../../../../lib/prisma";
 import { getLocale, getTranslations } from "next-intl/server";
 import { revalidatePath } from "next/cache";
@@ -17,13 +17,13 @@ const addShiftAction = async (data: AddShiftType): Promise<ResponseStatus> => {
 
     const locale = await getLocale();
     const t = await getTranslations("Salary");
-    const session = await getServerSession();
+    const session = await auth();
     if (!session) {
       throw new Error("Unauthorized");
     }
 
     const user = await prisma.user.findUnique({
-      where: { email: session.user?.email! },
+      where: { id: session.user?.id },
     });
     if (!user) {
       throw new Error("User not found");

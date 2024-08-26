@@ -2,7 +2,7 @@
 
 import { AddBillType, addBillSchema } from "@/schema/addBillSchema";
 import { ResponseStatus } from "@/types/responseStatus";
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 import prisma from "../../../../../lib/prisma";
 import { revalidatePath } from "next/cache";
 import { getLocale, getTranslations } from "next-intl/server";
@@ -18,13 +18,13 @@ const addBillAction = async (
       throw new Error("Invalid data");
     }
 
-    const session = await getServerSession();
+    const session = await auth();
     if (!session) {
       throw new Error("Unauthorized");
     }
 
     const user = await prisma.user.findUnique({
-      where: { email: session.user?.email! },
+      where: { id: session.user?.id },
     });
 
     if (!user) {

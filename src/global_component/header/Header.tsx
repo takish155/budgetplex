@@ -1,12 +1,12 @@
 import Link from "next/link";
 import React from "react";
 import GuestNav from "./guest/GuestNav";
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 import MemberNav from "./member/MemberNav";
 import MobileSelectLanguage from "./MobileSelectLanguage";
 
 const Header = async () => {
-  const session = await getServerSession();
+  const session = await auth();
 
   return (
     <header className="top-0 sticky flex justify-around z-50 w-full bg-background bg-opacity-40">

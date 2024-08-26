@@ -2,7 +2,7 @@
 
 import { SetupSalaryManager } from "@/schema/setupSalaryManagerSchema";
 import { ResponseStatus } from "@/types/responseStatus";
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 import { getLocale, getTranslations } from "next-intl/server";
 import { revalidatePath } from "next/cache";
 import prisma from "../../../../../lib/prisma";
@@ -13,13 +13,13 @@ const updateUserSalarySettingsAction = async (
   try {
     const locale = await getLocale();
     const t = await getTranslations("Salary");
-    const session = await getServerSession();
+    const session = await auth();
     if (!session) {
       throw new Error("Unauthorized");
     }
 
     const user = await prisma?.user.findUnique({
-      where: { email: session.user?.email! },
+      where: { id: session.user?.id },
     });
     if (!user) {
       throw new Error("User not found");

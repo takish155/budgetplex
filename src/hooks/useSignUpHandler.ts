@@ -2,13 +2,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ResponseStatus } from "@/types/responseStatus";
-import { useMutation } from "@tanstack/react-query";
 import { SignUpSchema, signUpSchema } from "@/schema/signUpSchema";
 import { signUpAction } from "@/app/api/auth/signUpAction";
-import { signIn } from "next-auth/react";
 import { toast } from "sonner";
-import { redirect, useRouter } from "next/navigation";
-import { useLocale } from "next-intl";
+import { useRouter } from "next/navigation";
 
 const useSignUpHandler = () => {
   const [formStatus, setFormStatus] = useState<ResponseStatus>({
@@ -22,8 +19,6 @@ const useSignUpHandler = () => {
   } = useForm<SignUpSchema>({
     resolver: zodResolver(signUpSchema),
   });
-
-  const locale = useLocale();
   const router = useRouter();
 
   const submitHandler = async (data: SignUpSchema) => {
@@ -33,12 +28,7 @@ const useSignUpHandler = () => {
       setFormStatus(response);
       if (response.status === "SUCCESS") {
         toast.success(response.message);
-        await signIn("credentials", {
-          redirect: false,
-          username: data.username,
-          password: data.password,
-        });
-        router.refresh();
+        router.push("/dashboard");
       }
     } catch (err) {
       setFormStatus({ message: "Something went wrong", status: "ERROR" });

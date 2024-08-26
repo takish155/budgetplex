@@ -1,6 +1,6 @@
 import prisma from "../../../../lib/prisma";
 import crypto from "crypto";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { Resend } from "resend";
 import { getLocale, getTranslations } from "next-intl/server";
 import { useTranslations } from "next-intl";

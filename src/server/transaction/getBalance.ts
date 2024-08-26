@@ -1,4 +1,4 @@
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 import { publicProcedure, router } from "../trpc";
 import prisma from "../../../lib/prisma";
 import { z } from "zod";
@@ -13,7 +13,7 @@ export const getBalanceRouter = router({
     )
     .query(async (opts) => {
       try {
-        const user = await getServerSession();
+        const user = await auth();
         if (!user) {
           throw new Error("Unauthorized");
         }

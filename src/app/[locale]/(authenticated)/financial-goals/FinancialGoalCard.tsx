@@ -3,8 +3,6 @@
 import React, { memo } from "react";
 import { FinancialGoals } from "./types/financialGoal.type";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { DeleteIcon, Info, Trash, Trash2 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { useTranslations } from "next-intl";
 import { formatToMoney } from "@/lib/formatToMoney";
@@ -12,7 +10,6 @@ import { calculateAmountToProgress } from "@/lib/calculateAmountToProgress";
 import AddProgressModal from "./modal/AddProgressModal";
 import RemoveFinancialGoalModal from "./modal/RemoveFinancialGoalModal";
 import UpdateFinancialGoalSheet from "./modal/UpdateFinancialGoalSheet";
-import PlanMonthlyForm from "./form/PlanMonthlyForm";
 import { useCurrencySign } from "@/context/CurrrencySignProvider";
 
 const FinancialGoalCard = ({ data }: { data: FinancialGoals }) => {

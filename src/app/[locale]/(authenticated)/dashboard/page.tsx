@@ -1,22 +1,21 @@
 import React from "react";
 import TransactionThisYearSection from "./TransactionThisYearSection";
-import BillsSection from "./BillsSection";
-import { caller } from "@/server";
-import { getTranslations } from "next-intl/server";
-import FinancialGoalSection from "./FInancialGoalSection";
+import { useTranslations } from "next-intl";
+import dynamic from "next/dynamic";
 
-const DashboardPage = async () => {
-  const translation = getTranslations("Dashboard");
-  const cur = caller.balance.getCurrencySign();
-  const [t, currency] = await Promise.all([translation, cur]);
+const BillsSection = dynamic(() => import("./BillsSection"));
+const FinancialGoalSection = dynamic(() => import("./FInancialGoalSection"));
+
+const DashboardPage = () => {
+  const t = useTranslations("Dashboard");
 
   return (
     <div className="w-[95%] mx-auto min-h-screen">
       <h2 className="text-miniheader font-semibold my-8">{t("title")}</h2>
       <section className="flex flex-wrap">
-        <TransactionThisYearSection currency={currency} />
-        <BillsSection currency={currency} />
-        <FinancialGoalSection currency={currency} />
+        <TransactionThisYearSection />
+        <BillsSection />
+        <FinancialGoalSection />
       </section>
     </div>
   );
