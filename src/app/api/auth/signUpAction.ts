@@ -2,10 +2,11 @@
 
 import { SignUpSchema, signUpSchema } from "@/schema/signUpSchema";
 import { getTranslations } from "next-intl/server";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { ResponseStatus } from "@/types/responseStatus";
 import prisma from "../../../../lib/prisma";
 import sendVerificationEmail from "../api_util/sendVerificationEmail";
+import { signIn } from "@/auth";
 
 export const signUpAction = async (
   data: SignUpSchema
@@ -47,6 +48,11 @@ export const signUpAction = async (
     });
 
     await sendVerificationEmail(user.id, data.email);
+    await signIn("credentials", {
+      username: data.username,
+      password: data.password,
+      redirect: false,
+    });
 
     return { message: t("signUpSuccess"), status: "SUCCESS" };
   } catch (error) {

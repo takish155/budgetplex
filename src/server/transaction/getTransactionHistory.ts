@@ -1,6 +1,6 @@
 import { publicProcedure, router } from "../trpc";
 import prisma from "../../../lib/prisma";
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 import { z } from "zod";
 import { categoryEnum } from "@/schema/addTransactionSchema";
 
@@ -18,14 +18,14 @@ export const getTransactionHistoryRouter = router({
       console.log("category: " + opts.input.category);
       console.log("index: " + opts.input.index);
       try {
-        const session = await getServerSession();
+        const session = await auth();
         if (!session) {
           throw new Error("Unauthorized");
         }
         console.log(opts.input.transactionType);
 
         const data = await prisma.user.findUnique({
-          where: { email: session.user?.email! },
+          where: { id: session.user?.id },
           select: {
             income: true,
             expenses: true,

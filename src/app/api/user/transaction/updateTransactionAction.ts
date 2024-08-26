@@ -6,7 +6,7 @@ import {
 } from "@/schema/addTransactionSchema";
 import { ResponseStatus } from "@/types/responseStatus";
 import prisma from "../../../../../lib/prisma";
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 import { getLocale, getTranslations } from "next-intl/server";
 
 export interface UpdateTransactionType extends AddTransactionType {
@@ -19,7 +19,7 @@ const updateTransactionAction = async (
   try {
     const locale = await getLocale();
     const t = await getTranslations("AddTransaction");
-    const session = await getServerSession();
+    const session = await auth();
     if (!session) {
       throw new Error("Unauthorized");
     }
@@ -30,7 +30,7 @@ const updateTransactionAction = async (
     }
 
     const user = await prisma.user.findUnique({
-      where: { email: session.user?.email! },
+      where: { id: session.user?.id },
     });
 
     if (!user) {

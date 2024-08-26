@@ -4,9 +4,9 @@ import {
   UpdatePasswordSchema,
   updatePasswordSchema,
 } from "@/app/[locale]/(authenticated)/settings/settingsType";
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 import prisma from "../../../../../lib/prisma";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { getTranslations } from "next-intl/server";
 
 const updatePasswordAction = async (data: UpdatePasswordSchema) => {
@@ -14,12 +14,12 @@ const updatePasswordAction = async (data: UpdatePasswordSchema) => {
     const isSafe = updatePasswordSchema.safeParse(data);
     if (!isSafe.success) throw new Error("Invalid data");
 
-    const session = await getServerSession();
+    const session = await auth();
     if (!session) throw new Error("Unauthorized");
 
     const user = await prisma.user.findUnique({
       where: {
-        email: session.user?.email!,
+        id: session.user?.id,
       },
     });
     if (!user) throw new Error("User not found");
@@ -41,8 +41,7 @@ const updatePasswordAction = async (data: UpdatePasswordSchema) => {
     const newHashedPassword = await bcrypt.hash(data.newPassword, 10);
     await prisma.user.update({
       where: {
-        email: session.user?.email!,
-        id: user.id,
+        id: session.user?.id,
       },
       data: {
         hashedPassword: newHashedPassword,

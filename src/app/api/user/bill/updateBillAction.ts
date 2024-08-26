@@ -1,6 +1,6 @@
 "use server";
 
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 import prisma from "../../../../../lib/prisma";
 import { AddBillType, addBillSchema } from "@/schema/addBillSchema";
 import { getLocale, getTranslations } from "next-intl/server";
@@ -10,7 +10,7 @@ const updateBillAction = async (billId: string, data: AddBillType) => {
   try {
     const t = await getTranslations("BillInfo");
     const locale = await getLocale();
-    const session = await getServerSession();
+    const session = await auth();
     if (!session) {
       throw new Error("Unauthorized");
     }
@@ -23,7 +23,7 @@ const updateBillAction = async (billId: string, data: AddBillType) => {
     }
 
     const user = await prisma.user.findUnique({
-      where: { email: session.user?.email! },
+      where: { id: session.user?.id },
     });
     if (!user) {
       throw new Error("User not found");

@@ -1,7 +1,7 @@
 "use server";
 
 import { AddShiftType, addShiftSchema } from "@/schema/addShiftSchema";
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 import prisma from "../../../../../lib/prisma";
 import { getLocale, getTranslations } from "next-intl/server";
 import { revalidatePath } from "next/cache";
@@ -16,11 +16,11 @@ const updateShiftAction = async (data: AddShiftType, id: string) => {
       throw new Error("Invalid data");
     }
 
-    const session = await getServerSession();
+    const session = await auth();
     if (!session) throw new Error("Unauthorized");
 
     const user = await prisma.user.findUnique({
-      where: { email: session.user?.email! },
+      where: { id: session.user?.id },
     });
     if (!user) throw new Error("User not found");
 

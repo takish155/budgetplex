@@ -1,6 +1,6 @@
 "use server";
 
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 import prisma from "../../../../../lib/prisma";
 import { getLocale, getTranslations } from "next-intl/server";
 import { ResponseStatus } from "@/types/responseStatus";
@@ -9,12 +9,12 @@ const deleteTransactionAction = async (id: string): Promise<ResponseStatus> => {
   const locale = await getLocale();
   const t = await getTranslations("AddTransaction");
   try {
-    const session = await getServerSession();
+    const session = await auth();
     if (!session) {
       throw new Error("Unauthorized");
     }
     const user = await prisma.user.findUnique({
-      where: { email: session.user?.email! },
+      where: { id: session.user?.id },
     });
     if (!user) {
       throw new Error("User not found");

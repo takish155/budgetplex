@@ -1,8 +1,8 @@
 import prisma from "../../../../lib/prisma";
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 
 export const getUserId = async () => {
-  const session = await getServerSession();
+  const session = await auth();
   if (!session) throw new Error("Unauthorized");
 
   const user = await prisma.user.findUnique({

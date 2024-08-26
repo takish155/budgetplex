@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { formatToMoney } from "@/lib/formatToMoney";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import React from "react";
 
@@ -19,7 +19,6 @@ interface AditionalBillInfoProps {
 
 const AditionalBillInfo = ({ data }: { data: AditionalBillInfoProps }) => {
   const t = useTranslations("Dashboard");
-  const locale = useLocale();
 
   return (
     <section className="w-[35%] max-sm:w-full">
@@ -41,7 +40,7 @@ const AditionalBillInfo = ({ data }: { data: AditionalBillInfoProps }) => {
         </CardHeader>
       </Card>
       <div className="flex justify-end">
-        <Link href={`/${locale}/bills`} passHref>
+        <Link href={`/bills`} passHref>
           <Button>{t("showMore")}</Button>
         </Link>
       </div>

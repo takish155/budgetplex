@@ -1,4 +1,4 @@
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 import { publicProcedure, router } from "../trpc";
 import prisma from "../../../lib/prisma";
 import { redirect } from "next/navigation";
@@ -18,13 +18,13 @@ export const getSalaryDataRouter = router({
       const t = await getTranslations("Salary");
       const locale = await getLocale();
       try {
-        const session = await getServerSession();
+        const session = await auth();
         if (!session) {
           throw new Error("Unauthorized");
         }
 
         const user = await prisma.user.findUnique({
-          where: { email: session.user?.email! },
+          where: { id: session.user?.id },
         });
         if (!user) {
           throw new Error("User not found");

@@ -4,10 +4,7 @@ import Balance from "./balance/Balance";
 import TransactionHistorySection from "./TransactionHistorySection";
 import { TransactionContextProvider } from "@/context/TransactionProvider";
 import { useTranslations } from "next-intl";
-import dynamic from "next/dynamic";
-import TransactionFilterSkeleton from "./render/TransactionFilterSkeleton";
 import CurrentDate from "./render/CurrentDate";
-import ChangeDateSkeleton from "./render/ChangeDateSkeleton";
 import FilterSection from "./FilterSection";
 
 const page = () => {

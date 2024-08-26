@@ -25,7 +25,9 @@ const FinancialGoalsChart = ({
   chartData: FinancialGoalsChartProps;
 }) => {
   const t = useTranslations("Dashboard");
-  const calculatedPercentages = calculatePercentages(chartData.chartData);
+  const calculatedPercentages = calculatePercentages(
+    chartData?.chartData ?? []
+  );
 
   // TODO: Only show name and percentage in the legend
   const chartConfig = {

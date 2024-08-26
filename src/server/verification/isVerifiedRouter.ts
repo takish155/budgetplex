@@ -1,11 +1,11 @@
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth";
 import { publicProcedure, router } from "../trpc";
 import prisma from "../../../lib/prisma";
 
 export const isVerifiedRouter = router({
   isVerified: publicProcedure.query(async () => {
     try {
-      const session = await getServerSession();
+      const session = await auth();
       if (!session) throw new Error("Unauthorized");
 
       const user = await prisma.user.findUnique({

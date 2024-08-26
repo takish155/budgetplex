@@ -1,20 +1,14 @@
 import MessageCard from "@/components/MessageCard";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { caller } from "@/server";
-import { getServerSession } from "next-auth";
 import { getLocale, getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import React from "react";
 import ResendVerification from "./ResendVerification";
+import { auth } from "@/auth";
 
 const page = async () => {
   const locale = await getLocale();
-  const session = await getServerSession();
+  const session = await auth();
   if (!session) redirect(`/${locale}/auth/signin`);
 
   const response = await caller.verification.isVerified();
