@@ -42,7 +42,6 @@ const updatePasswordAction = async (data: UpdatePasswordSchema) => {
     await prisma.user.update({
       where: {
         id: session.user?.id,
-        id: user.id,
       },
       data: {
         hashedPassword: newHashedPassword,

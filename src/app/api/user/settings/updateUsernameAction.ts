@@ -35,7 +35,6 @@ const updateUsernameAction = async (
     await prisma.user.update({
       where: {
         id: session.user?.id,
-        id: user.id,
       },
       data: {
         username: username,
